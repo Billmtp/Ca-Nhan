@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Lịch sử Việt Nam</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(40,40,40,0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23ffffff"/></svg>');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* Navigation Menu */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: rgba(220, 20, 60, 0.9);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(220, 20, 60, 1);
+            transform: scale(1.1);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a1a1a, #2d2d2d);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding-top: 80px;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.5);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+
+        .sidebar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px 30px;
+            display: block;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            background: rgba(220, 20, 60, 0.2);
+            border-left: 4px solid #dc143c;
+            transform: translateX(10px);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 100px 20px 50px;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1), rgba(255, 215, 0, 0.1));
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .intro-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Video Section */
+        .video-section {
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .video-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(220, 20, 60, 0.3);
+            border-color: rgba(255,215,0,0.5);
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .card p {
+            color: #e0e0e0;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid #ffd700;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .close {
+            color: #ffd700;
+            float: right;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #dc143c;
+        }
+
+        .modal h2 {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        .modal p {
+            color: #e0e0e0;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 20px;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Toggle Button -->
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="index.html" class="active">Trang Chủ</a></li>
+            <li><a href="heroes.html">Anh Hùng Việt Nam</a></li>
+            <li><a href="history.html">Lịch Sử Việt Nam</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Lịch Sử Việt Nam</h1>
+            <p>Khám phá di sản văn hóa và lịch sử huy hoàng của dân tộc Việt Nam</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="intro-section">
+            <h2>Đất Nước Việt Nam</h2>
+            <p>
+                Việt Nam là một đất nước có lịch sử hàng nghìn năm với nhiều anh hùng dân tộc đã hy sinh vì độc lập và tự do. 
+                Từ thời Hùng Vương dựng nước đến các cuộc kháng chiến chống ngoại xâm, dân tộc Việt Nam luôn kiên cường và bất khuất.
+            </p>
+        </div>
+
+        <div class="video-section">
+            <h3>Video Giới Thiệu</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/KKHpQ8xeczQ" 
+                        title="Lịch sử Việt Nam" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card" onclick="openModal('homeModal1')">
+                <div class="card-image">
+                    <img src="https://imgs.search.brave.com/MLhfCEaGzWEvLE7d2VzLg0j7G9ALksx_ENv7MicIzKQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI5/NzcyMjY2NS92aS9h/bmgvcXUlRTElQkIl/OTFjLWslRTElQkIl/QjMtdmklRTElQkIl/ODd0LW5hbS1jaCVF/MSVCQiU5MW5nLWwl/RTElQkElQTFpLWMl/QzMlQTFjLXQlQzMl/QjJhLW5oJUMzJUEw/LXRoJUMzJUEwbmgt/cGglRTElQkIlOTEt/YiVFMSVCQiU4Qi1t/JUUxJUJBJUE1dC1u/JUMzJUE5dC5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9bklk/TTFOM0I2OW0xY2Nk/MDBDOVc4Tk11bjls/UXFESXNVbXE4X0V0/d2RsND0" 
+                         alt="Quốc kỳ Việt Nam">
+                </div>
+                <h3>Biểu Tượng Dân Tộc</h3>
+                <p>Quốc kỳ Việt Nam với ngôi sao vàng trên nền đỏ, biểu tượng của ý chí độc lập và thống nhất...</p>
+            </div>
+            
+            <div class="card" onclick="openModal('homeModal2')">
+                <div class="card-image">
+                    <img src="https://imgs.search.brave.com/aUdiNK08wJ0TMIk19WsTpK6uJDzGJAIDsYq_TgZrZZE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/dGh1dmllbnBoYXBs/dWF0LnZuL3VwbG9h/ZHMvbGFvZG9uZ3Rp/ZW5sdW9uZy8yMDIz/MDMwMS9QRFAvaGlu/aC1hbmgtMzU2OS5q/cGc" 
+                         alt="Văn hóa Việt Nam">
+                </div>
+                <h3>Văn Hóa Truyền Thống</h3>
+                <p>Nền văn hóa Việt Nam đậm đà bản sắc dân tộc, được hình thành qua hàng nghìn năm lịch sử...</p>
+            </div>
+            
+            <div class="card" onclick="openModal('homeModal3')">
+                <div class="card-image">
+                    <img src="https://imgs.search.brave.com/-92ITFnSbTmeYbCEzYtpDTTK9UX9VD3jmAtVEkh12xU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zYWtv/cy52bi93cC1jb250/ZW50L3VwbG9hZHMv/MjAyMy8xMC9EdS1h/bi1tb2ktMS01LnBu/Zw" 
+                         alt="Di sản Việt Nam">
+                </div>
+                <h3>Di Sản Thế Giới</h3>
+                <p>Việt Nam hiện có 8 di sản thế giới được UNESCO công nhận, thể hiện giá trị văn hóa độc đáo...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="homeModal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('homeModal1')">&times;</span>
+            <h2>Biểu Tượng Dân Tộc</h2>
+            <p>Quốc kỳ Việt Nam được chính thức thông qua ngày 30/11/1955. Ngôi sao vàng năm cánh trên nền đỏ tượng trưng cho sự lãnh đạo của Đảng Cộng sản, màu đỏ biểu trưng cho máu và lửa của cách mạng.</p>
+            <p>Quốc ca "Tiến Quân Ca" do nhạc sĩ Văn Cao sáng tác năm 1944, trở thành quốc ca chính thức từ năm 1945.</p>
+            <p>Quốc huy Việt Nam có hình tròn, màu đỏ, ở giữa có ngôi sao vàng năm cánh, xung quanh có bông lúa và bánh răng, dưới có dải băng ghi "Cộng hòa xã hội chủ nghĩa Việt Nam".</p>
+        </div>
+    </div>
+
+    <div id="homeModal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('homeModal2')">&times;</span>
+            <h2>Văn Hóa Truyền Thống</h2>
+            <p>Văn hóa Việt Nam được hình thành qua hàng nghìn năm lịch sử, chịu ảnh hưởng của văn hóa Trung Quốc, văn hóa Ấn Độ nhưng vẫn giữ được bản sắc riêng độc đáo.</p>
+            <p>Các giá trị truyền thống như hiếu thảo, tình làng nghĩa xóm, tinh thần đoàn kết, lòng yêu nước luôn được trân trọng và giữ gìn.</p>
+            <p>Nghệ thuật dân gian phong phú với ca trù, chầu văn, tuồng, chèo, dân ca các vùng miền tạo nên bức tranh văn hóa đa dạng và sinh động.</p>
+        </div>
+    </div>
+
+    <div id="homeModal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('homeModal3')">&times;</span>
+            <h2>Di Sản Thế Giới</h2>
+            <p>Việt Nam hiện có 8 di sản thế giới được UNESCO công nhận, bao gồm 5 di sản văn hóa và 3 di sản thiên nhiên.</p>
+            <p><strong>Di sản văn hóa:</strong> Khu di tích lịch sử Huế, Phố cổ Hội An, Thánh địa Mỹ Sơn, Khu di tích Hoàng thành Thăng Long, Citadel của Hoàng triều Nguyễn tại Huế.</p>
+            <p><strong>Di sản thiên nhiên:</strong> Vịnh Hạ Long, Vườn quốc gia Phong Nha - Kẻ Bàng, Quần thể danh thắng Tràng An.</p>
+            <p>Các di sản này thể hiện giá trị văn hóa, lịch sử và thiên nhiên độc đáo của Việt Nam, được thế giới công nhận và bảo tồn.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+                
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Add loading animation for cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Add parallax effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            if (header) {
+                header.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Handle image loading errors
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.card-image img');
+            images.forEach(img => {
+                img.addEventListener('error', function() {
+                    this.style.display = 'none';
+                    this.parentElement.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; background: rgba(255,255,255,0.1); color: #ffd700; font-weight: 600;">Hình ảnh đang tải...</div>';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
