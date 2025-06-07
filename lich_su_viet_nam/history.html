@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Sử Việt Nam - Di Sản Dân Tộc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(40,40,40,0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23ffffff"/></svg>');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* Navigation Menu */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: rgba(220, 20, 60, 0.9);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(220, 20, 60, 1);
+            transform: scale(1.1);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a1a1a, #2d2d2d);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding-top: 80px;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.5);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+
+        .sidebar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px 30px;
+            display: block;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            background: rgba(220, 20, 60, 0.2);
+            border-left: 4px solid #dc143c;
+            transform: translateX(10px);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 100px 20px 50px;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1), rgba(255, 215, 0, 0.1));
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .intro-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .timeline-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, #ffd700, #dc143c);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 40px 0;
+            opacity: 0;
+            animation: slideInTimeline 0.6s ease forwards;
+        }
+
+        .timeline-item:nth-child(odd) {
+            text-align: right;
+            padding-right: 50%;
+        }
+
+        .timeline-item:nth-child(even) {
+            text-align: left;
+            padding-left: 50%;
+        }
+
+        .timeline-content {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(220, 20, 60, 0.3);
+        }
+
+        .timeline-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #ffd700;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(220, 20, 60, 0.3);
+            border-color: rgba(255,215,0,0.5);
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .card p {
+            color: #e0e0e0;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid #ffd700;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .close {
+            color: #ffd700;
+            float: right;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #dc143c;
+        }
+
+        .modal h2 {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        .modal p {
+            color: #e0e0e0;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .modal ul {
+            color: #e0e0e0;
+            line-height: 1.8;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .modal li {
+            margin-bottom: 8px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInTimeline {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .timeline::after {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                padding-left: 50px !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 20px;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Toggle Button -->
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="heroes.html">Anh Hùng Việt Nam</a></li>
+            <li><a href="history.html" class="active">Lịch Sử Việt Nam</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Lịch Sử Việt Nam</h1>
+            <p>Hành trình 4000 năm dựng nước và giữ nước của dân tộc Việt Nam</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="intro-section">
+            <h2>Dòng Chảy Lịch Sử</h2>
+            <p>
+                Lịch sử Việt Nam là một bộ sử thi hùng tráng với hàng nghìn năm dựng nước và giữ nước. 
+                Từ thời Hùng Vương lập quốc đến những cuộc kháng chiến anh dũng chống ngoại xâm, 
+                dân tộc Việt Nam đã viết nên những trang sử vàng bất hủ.
+            </p>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <h3>Dòng Thời Gian Lịch Sử</h3>
+            <div class="timeline">
+                <div class="timeline-item" onclick="openModal('timelineModal1')">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2879 TCN</div>
+                        <div class="timeline-title">Thời Hùng Vương</div>
+                        <div class="timeline-description">Vua Hùng lập nước Văn Lang, khởi đầu lịch sử dân tộc Việt Nam</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" onclick="openModal('timelineModal2')">
+                    <div class="timeline-content">
+                        <div class="timeline-year">258 TCN</div>
+                        <div class="timeline-title">Thục Phán - An Dương Vương</div>
+                        <div class="timeline-description">Lập nước Âu Lạc, xây thành Cổ Loa</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" onclick="openModal('timelineModal3')">
+                    <div class="timeline-content">
+                        <div class="timeline-year">939</div>
+                        <div class="timeline-title">Ngô Quyền</div>
+                        <div class="timeline-description">Thắng quân Nam Hán tại sông Bạch Đằng, mở đầu thời kỳ độc lập</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" onclick="openModal('timelineModal4')">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1010</div>
+                        <div class="timeline-title">Nhà Lý</div>
+                        <div class="timeline-description">Lý Thái Tổ dời đô về Thăng Long, mở đầu thời đại phồn vinh</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" onclick="openModal('timelineModal5')">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1945</div>
+                        <div class="timeline-title">Cách mạng tháng Tám</div>
+                        <div class="timeline-description">Tuyên bố độc lập, thành lập nước Việt Nam Dân chủ Cộng hòa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card" onclick="openModal('historyModal1')">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1548013146-72479768bada?w=600&h=400&fit=crop&crop=center')"></div>
+                <h3>Thời Kỳ Hùng Vương</h3>
+                <p>Khởi nguồn lịch sử dân tộc với 18 đời Vua Hùng trị vì đất nước Văn Lang. Thời kỳ này đặt nền móng cho văn hóa lúa nước và truyền thống yêu nước...</p>
+            </div>
+            
+            <div class="card" onclick="openModal('historyModal2')">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1569165003085-e8a1066f1cb8?w=600&h=400&fit=crop&crop=center')"></div>
+                <h3>Các Trận Bạch Đằng</h3>
+                <p>Ba trận thắng lịch sử tại sông Bạch Đằng (938, 981, 1288) đã khẳng định ý chí độc lập của dân tộc Việt Nam trước các thế lực xâm lược...</p>
+            </div>
+            
+            <div class="card" onclick="openModal('historyModal3')">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=600&h=400&fit=crop&crop=center')"></div>
+                <h3>Thời Kỳ Phong Kiến</h3>
+                <p>Từ thế kỷ X đến XIX, các triều đại phong kiến Việt Nam đã xây dựng một nền văn minh rực rỡ với nhiều thành tựu về văn hóa, giáo dục và quản lý...</p>
+            </div>
+            
+            <div class="card" onclick="openModal('historyModal4')">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1580500550469-87b0c13c4690?w=600&h=400&fit=crop&crop=center')"></div>
+                <h3>Cách Mạng Tháng Tám</h3>
+                <p>Tháng 8/1945, dưới sự lãnh đạo của Đảng Cộng sản và Chủ tịch Hồ Chí Minh, nhân dân Việt Nam đã giành được chính quyền và độc lập dân tộc...</p>
+            </div>
+            
+            <div class="card" onclick="openModal('historyModal5')">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1544966503-7ac5bd6e4a25?w=600&h=400&fit=crop&crop=center')"></div>
+                <h3>Kháng Chiến Chống Pháp</h3>
+                <p>Cuộc kháng chiến 9 năm (1946-1954) chống thực dân Pháp đã kết thúc bằng chiến thắng Điện Biên Phủ lẫy lừng, mở ra kỷ nguyên mới...</p>
+            </div>
+            
+            <div class="card" onclick="openModal('historyModal6')">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=600&h=400&fit=crop&crop=center')"></div>
+                <h3>Thống Nhất Đất Nước</h3>
+                <p>Sau chiến thắng 30/4/1975, đất nước Việt Nam được thống nhất hoàn toàn. Ngày 2/7/1976, nước Cộng hòa xã hội chủ nghĩa Việt Nam ra đời...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline Modals -->
+    <div id="timelineModal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('timelineModal1')">&times;</span>
+            <h2>Thời Hùng Vương (2879 TCN - 258 TCN)</h2>
+            <p>Thời Hùng Vương là giai đoạn đầu tiên trong lịch sử dân tộc Việt Nam, được ghi chép trong các sử sách cổ và truyền thuyết dân gian.</p>
+            <p><strong>Đặc điểm nổi bật:</strong></p>
+            <ul>
+                <li>18 đời Vua Hùng trị vì đất nước Văn Lang</li>
+                <li>Thủ đô đặt tại Phong Châu (nay thuộc Phú Thọ)</li>
+                <li>Hình thành văn hóa lúa nước, nghề trồng lúa</li>
+                <li>Tổ chức xã hội theo chế độ bộ lạc</li>
+                <li>Thờ cúng tổ tiên, tín ngưỡng dân gian</li>
+            </ul>
+            <p>Thời kỳ này đặt nền móng cho bản sắc văn hóa dân tộc Việt Nam và truyền thống "uống nước nhớ nguồn".</p>
+        </div>
+    </div>
+
+    <div id="timelineModal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('timelineModal2')">&times;</span>
+            <h2>Thục Phán - An Dương Vương (258 TCN - 207 TCN)</h2>
+            <p>Thục Phán là vị vua đã thống nhất các bộ lạc Âu Việt và Lạc Việt, lập nên nước Âu Lạc.</p>
+            <p><strong>Những thành tựu quan trọng:</strong></p>
+            <ul>
+                <li>Thống nhất đất nước Văn Lang và lập nước Âu Lạc</li>
+                <li>Xây dựng thành Cổ Loa - kinh đô đầu tiên của Việt Nam</li>
+                <li>Tạo ra nỏ thần, vũ khí phòng thủ mạnh mẽ</li>
+                <li>Tổ chức quân đội và hệ thống phòng thủ</li>
+            </ul>
+            <p>Thành Cổ Loa với thiết kế xoắn ốc độc đáo là minh chứng cho trí tuệ và tài năng kiến trúc của người Việt cổ.</p>
+        </div>
+    </div>
+
+    <div id="timelineModal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('timelineModal3')">&times;</span>
+            <h2>Ngô Quyền và Trận Bạch Đằng (939)</h2>
+            <p>Ngô Quyền là vị anh hùng dân tộc đã mở ra kỷ nguyên độc lập của Việt Nam sau 1000 năm Bắc thuộc.</p>
+            <p><strong>Trận Bạch Đằng Giang:</strong></p>
+            <ul>
+                <li>Diễn ra năm 938 trên sông Bạch Đằng</li>
+                <li>Sử dụng chiến thuật cọc nhọn dưới nước</li>
+                <li>Tiêu diệt hoàn toàn hạm đội Nam Hán</li>
+                <li>Giết chết Hoàng thái tử Lưu Hoằng Tháo</li>
+            </ul>
+            <p>Chiến thắng này kết thúc thời kỳ Bắc thuộc và mở đầu cho thời kỳ độc lập dân tộc kéo dài gần 1000 năm.</p>
+        </div>
+    </div>
+
+    <div id="timelineModal4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('timelineModal4')">&times;</span>
+            <h2>Nhà Lý và Thăng Long (1010-1225)</h2>
+            <p>Triều đại Lý là thời kỳ hoàng kim của lịch sử Việt Nam với nhiều thành tựu về chính trị, văn hóa và xã hội.</p>
+            <p><strong>Những thành tựu nổi bật:</strong></p>
+            <ul>
+                <li>Lý Thái Tổ dời đô về Thăng Long (1010)</li>
+                <li>Xây dựng chế độ quân chủ tập quyền ổn định</li>
+                <li>Phát triển nông nghiệp, thủ công nghiệp</li>
+                <li>Mở rộng giao lưu với các nước láng giềng</li>
+                <li>Phát triển Phật giáo và văn hóa dân tộc</li>
+            </ul>
+            <p>Chiếu dời đô của Lý Thái Tổ thể hiện tầm nhìn xa trông rộng và tài năng lãnh đạo xuất sắc.</p>
+        </div>
+    </div>
+
+    <div id="timelineModal5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('timelineModal5')">&times;</span>
+            <h2>Cách Mạng Tháng Tám (1945)</h2>
+            <p>Cách mạng tháng Tám 1945 là sự kiện lịch sử vĩ đại, đánh dấu sự ra đời của nước Việt Nam Dân chủ Cộng hòa.</p>
+            <p><strong>Diễn biến quan trọng:</strong></p>
+            <ul>
+                <li>Nhật Bản đầu hàng Đồng minh (15/8/1945)</li>
+                <li>Việt Minh nổi dậy giành chính quyền</li>
+                <li>Bảo Đại thoái vị, giao ấn kiếm (25/8/1945)</li>
+                <li>Chủ tịch Hồ Chí Minh đọc Tuyên ngôn độc lập (2/9/1945)</li>
+            </ul>
+            <p>Thành công của Cách mạng tháng Tám mở ra kỷ nguyên mới trong lịch sử dân tộc Việt Nam.</p>
+        </div>
+    </div>
+
+    <!-- History Modals -->
+    <div id="historyModal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('historyModal1')">&times;</span>
+            <h2>Thời Kỳ Hùng Vương</h2>
+            <p>Thời Hùng Vương là giai đoạn hình thành và phát triển của quốc gia Việt Nam cổ đại, được coi là khởi nguồn của lịch sử dân tộc.</p>
+            <p><strong>Văn hóa Đông Sơn:</strong> Phát triển mạnh mẽ với nghề chế
+             <script>function toggleSidebar() {
+             const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+}
+
+// Đóng menu khi click bên ngoài
+document.addEventListener('click', function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+        sidebar.classList.remove('active');
+    }
+});
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+                
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Add loading animation for cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Add parallax effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            if (header) {
+                header.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Handle image loading errors
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.card-image img');
+            images.forEach(img => {
+                img.addEventListener('error', function() {
+                    this.style.display = 'none';
+                    this.parentElement.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; background: rgba(255,255,255,0.1); color: #ffd700; font-weight: 600;">Hình ảnh đang tải...</div>';
+                });
+            });
+        });
+    </script>
