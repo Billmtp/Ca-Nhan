@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anh Hùng Việt Nam - Lịch sử Việt Nam</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(40,40,40,0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23ffffff"/></svg>');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* Navigation Menu */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: rgba(220, 20, 60, 0.9);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(220, 20, 60, 1);
+            transform: scale(1.1);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a1a1a, #2d2d2d);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding-top: 80px;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.5);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+
+        .sidebar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px 30px;
+            display: block;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            background: rgba(220, 20, 60, 0.2);
+            border-left: 4px solid #dc143c;
+            transform: translateX(10px);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 100px 20px 50px;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1), rgba(255, 215, 0, 0.1));
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .intro-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Hero Card Grid */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .hero-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(220, 20, 60, 0.3);
+            border-color: rgba(255,215,0,0.5);
+        }
+
+        .hero-card:hover::before {
+            left: 100%;
+        }
+
+        .hero-image {
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.2);
+            border: 3px solid #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #ffd700;
+            font-weight: 600;
+            font-size: 14px;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .hero-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .hero-period {
+            color: #dc143c;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero-card p {
+            color: #e0e0e0;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            margin: 3% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 2px solid #ffd700;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .close {
+            color: #ffd700;
+            float: right;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #dc143c;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 30px;
+        }
+
+        .modal-image {
+            width: 200px;
+            height: 200px;
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-title {
+            flex: 1;
+        }
+
+        .modal h2 {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-period {
+            color: #dc143c;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .modal-quote {
+            font-style: italic;
+            color: #ffd700;
+            font-size: 1.1rem;
+            border-left: 4px solid #ffd700;
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        .modal p {
+            color: #e0e0e0;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .modal h3 {
+            color: #ffd700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 25px 0 15px;
+        }
+
+        .achievements {
+            background: rgba(255,215,0,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .achievements ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .achievements li {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .achievements li::before {
+            content: "⭐";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .modal-content {
+                margin: 5% auto;
+                padding: 20px;
+                width: 95%;
+            }
+
+            .modal-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .modal-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .modal h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Toggle Button -->
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="heroes.html" class="active">Anh Hùng Việt Nam</a></li>
+            <li><a href="history.html">Lịch Sử Việt Nam</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Anh Hùng Việt Nam</h1>
+            <p>Tôn vinh những vị anh hùng dân tộc đã hy sinh vì độc lập, tự do của Tổ quốc</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="intro-section">
+            <h2>Những Vị Anh Hùng Bất Tử</h2>
+            <p>
+                Lịch sử Việt Nam ghi nhận công lao to lớn của những vị anh hùng dân tộc, 
+                những con người đã cống hiến cả cuộc đời cho sự nghiệp giải phóng dân tộc và bảo vệ Tổ quốc.
+            </p>
+        </div>
+
+        <div class="hero-grid">
+            <!-- Vua Quang Trung -->
+            <div class="hero-card" onclick="openModal('heroModal1')">
+                <div class="hero-image">
+                    <img src="https://848603edf5.vws.vegacdn.vn/UploadImages%2Fhaiphong%2Fthnguyenhue%2F2021_10%2Ftieu_su_vua_nguyen_hue%2Fquang-trung-1_1110202116.jpg?w=1130" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <h3>Vua Quang Trung</h3>
+                <div class="hero-period">1753 - 1792</div>
+                <p>Hoàng đế triều Tây Sơn, anh hùng dân tộc đã đánh bại quân Thanh xâm lược...</p>
+            </div>
+
+            <!-- Trần Hưng Đạo -->
+            <div class="hero-card" onclick="openModal('heroModal2')">
+                <div class="hero-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/T%C6%B0%E1%BB%A3ng_%C4%91%E1%BB%93ng_Tr%E1%BA%A7n_H%C6%B0ng_%C4%90%E1%BA%A1o_t%E1%BA%A1i_%C4%91%E1%BB%81n_Ki%E1%BA%BFp_B%E1%BA%A1c.jpg/250px-T%C6%B0%E1%BB%A3ng_%C4%91%E1%BB%93ng_Tr%E1%BA%A7n_H%C6%B0ng_%C4%90%E1%BA%A1o_t%E1%BA%A1i_%C4%91%E1%BB%81n_Ki%E1%BA%BFp_B%E1%BA%A1c.jpg" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <h3>Trần Hưng Đạo</h3>
+                <div class="hero-period">1228 - 1300</div>
+                <p>Đại tướng triều Trần, người anh hùng ba lần đánh thắng quân Mông Cổ...</p>
+            </div>
+
+            <!-- Lý Thường Kiệt -->
+            <div class="hero-card" onclick="openModal('heroModal3')">
+                <div class="hero-image">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9wmOv0bLO_s5fbrVkl1Xa63jggecVhxx3WA&s" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <h3>Lý Thường Kiệt</h3>
+                <div class="hero-period">1019 - 1105</div>
+                <p>Tướng tài triều Lý, tác giả bài thơ "Nam quốc sơn hà" đầu tiên khẳng định chủ quyền...</p>
+            </div>
+
+            <!-- Hai Bà Trưng -->
+            <div class="hero-card" onclick="openModal('heroModal4')">
+                <div class="hero-image">
+                      <img src="https://hoangthanhthanglong.vn/wp-content/uploads/2023/05/haibatrung2.jpg" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <h3>Hai Bà Trưng</h3>
+                <div class="hero-period">14 - 43</div>
+                <p>Trưng Trắc và Trưng Nhị, hai chị em anh hùng đầu tiên nổi dậy chống Bắc thuộc...</p>
+            </div>
+
+            <!-- Ngô Quyền -->
+            <div class="hero-card" onclick="openModal('heroModal5')">
+                <div class="hero-image">
+                      <img src="https://khaiminhduc.edu.vn/wp-content/uploads/2022/07/Vua-Ngo-Quyen-3.jpg" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <h3>Ngô Quyền</h3>
+                <div class="hero-period">897 - 944</div>
+                <p>Vua đầu tiên của Việt Nam độc lập, người thắng trận Bạch Đằng năm 938...</p>
+            </div>
+
+            <!-- Lê Lợi -->
+            <div class="hero-card" onclick="openModal('heroModal6')">
+                <div class="hero-image">
+                    <img src="https://baotang.thanhhoa.gov.vn/portal/Photos/2015-10-02/db27ccf92718f33dget_img(3).jpg" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <h3>Lê Lợi</h3>
+                <div class="hero-period">1385 - 1433</div>
+                <p>Thái tổ triều Lê, anh hùng khởi nghĩa Lam Sơn đánh đuổi quân Minh...</p>
+            </div>
+
+            <!-- Bà Triệu -->
+            <div class="hero-card" onclick="openModal('heroModal7')">
+                <div class="hero-image">
+                     <img src="https://bizweb.dktcdn.net/100/500/453/files/ba-trieu-03.jpg?v=1699070959700" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <h3>Bà Triệu</h3>
+                <div class="hero-period">226 - 248</div>
+                <p>Triệu Thị Trinh, nữ anh hùng thời Tam Quốc, lãnh đạo cuộc khởi nghĩa chống Đông Ngô...</p>
+            </div>
+
+            <!-- Đinh Tiên Hoàng -->
+            <div class="hero-card" onclick="openModal('heroModal8')">
+                <div class="hero-image">
+                      <img src="https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2025/1/19/0f7a088e98064cb5a926b4d445b4dd74" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <h3>Đinh Tiên Hoàng</h3>
+                <div class="hero-period">924 - 979</div>
+                <p>Hoàng đế đầu tiên của nhà Đinh, người thống nhất đất nước sau loạn 12 sứ quân...</p>
+            </div>
+
+            <!-- Hồ Chí Minh -->
+            <div class="hero-card" onclick="openModal('heroModal9')">
+                <div class="hero-image">
+                     <img src="https://media.vov.vn/sites/default/files/styles/large/public/2020-08/chu_tich_ho_chi_minh_1_bvii_ylkw.jpg" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <h3>Hồ Chí Minh</h3>
+                <div class="hero-period">1890 - 1969</div>
+                <p>Chủ tịch nước, lãnh tụ vĩ đại của dân tộc Việt Nam, người sáng lập nước Việt Nam Dân chủ Cộng hòa...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Modal Vua Quang Trung -->
+    <div id="heroModal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('heroModal1')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                    <img src="https://848603edf5.vws.vegacdn.vn/UploadImages%2Fhaiphong%2Fthnguyenhue%2F2021_10%2Ftieu_su_vua_nguyen_hue%2Fquang-trung-1_1110202116.jpg?w=1130" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <div class="modal-title">
+                    <h2>Vua Quang Trung</h2>
+                    <div class="modal-period">Nguyễn Huệ (1753 - 1792)</div>
+                </div>
+            </div>
+            
+            <div class="modal-quote">
+                "Thà làm vua một ngày còn hơn làm tôi cả đời"
+            </div>
+            
+            <p>Nguyễn Huệ, tức Hoàng đế Quang Trung, là một trong những vị hoàng đế vĩ đại nhất trong lịch sử Việt Nam. Sinh ra trong một gia đình nghèo ở Tây Sơn, Bình Định, ông cùng hai anh em đã lãnh đạo cuộc khởi nghĩa Tây Sơn lừng lẫy.</p>
+            
+            <h3>Cuộc đời và sự nghiệp</h3>
+            <p>Quang Trung nổi tiếng với tài năng quân sự xuất chúng và tầm nhìn chính trị sâu sắc. Ông đã thống nhất đất nước sau nhiều thập kỷ chia cắt, xây dựng một triều đại mạnh mẽ với nhiều cải cách tiến bộ.</p>
+            
+            <p>Chiến thắng vĩ đại nhất của ông là cuộc phản công chống quân Thanh xâm lược năm 1789. Trong chỉ 5 ngày, từ mùng 3 đến mùng 7 Tết Kỷ Dậu, ông đã đánh bại hoàn toàn 29 vạn quân Thanh, giải phóng Thăng Long.</p>
+            
+            <div class="achievements">
+                <h3>Thành tựu nổi bật</h3>
+                <ul>
+                    <li>Thống nhất đất nước sau thời kỳ chia cắt Trịnh - Nguyễn</li>
+                    <li>Đánh bại 29 vạn quân Thanh xâm lược trong 5 ngày</li>
+                    <li>Cải cách hành chính, phát triển kinh tế</li>
+                    <li>Khuyến khích văn hóa, giáo dục</li>
+                    <li>Xây dựng quân đội hùng mạnh</li>
+                </ul>
+            </div>
+            
+            <p>Vua Quang Trung qua đời khi chưa đầy 40 tuổi, để lại một di sản vĩ đại cho dân tộc Việt Nam. Ông được tôn vinh là một trong những anh hùng dân tộc vĩ đại nhất, biểu tượng của ý chí độc lập và khát vọng thống nhất Tổ quốc.</p>
+        </div>
+    </div>
+
+    <!-- Modal Trần Hưng Đạo -->
+    <div id="heroModal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('heroModal2')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/T%C6%B0%E1%BB%A3ng_%C4%91%E1%BB%93ng_Tr%E1%BA%A7n_H%C6%B0ng_%C4%90%E1%BA%A1o_t%E1%BA%A1i_%C4%91%E1%BB%81n_Ki%E1%BA%BFp_B%E1%BA%A1c.jpg/250px-T%C6%B0%E1%BB%A3ng_%C4%91%E1%BB%93ng_Tr%E1%BA%A7n_H%C6%B0ng_%C4%90%E1%BA%A1o_t%E1%BA%A1i_%C4%91%E1%BB%81n_Ki%E1%BA%BFp_B%E1%BA%A1c.jpg" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <div class="modal-title">
+                    <h2>Trần Hưng Đạo</h2>
+                    <div class="modal-period">Trần Quốc Tuấn (1228 - 1300)</div>
+                </div>
+            </div>
+            
+            <div class="modal-quote">
+                "Giặc đến nhà thì phải đánh, không có lý nào khác!"
+            </div>
+            
+            <p>Trần Quốc Tuấn, tức Trần Hưng Đạo, là một danh tướng vĩ đại của dân tộc Việt Nam thời nhà Trần. Ông được biết đến như vị anh hùng ba lần đánh thắng quân Mông - Nguyên xâm lược.</p>
+            
+            <h3>Ba lần chống quân Mông - Nguyên</h3>
+            <p>Lần thứ nhất (1258): Quân Mông Cổ do Uriyangkhadai chỉ huy xâm lược Đại Việt. Trần Hưng Đạo đã vận dụng chiến thuật du kích, đánh thắng địch quân tại nhiều trận.</p>
+            
+            <p>Lần thứ hai (1285): Thái tử Toghan cùng 50 vạn quân xâm lược. Ông đã chỉ đạo cuộc kháng chiến toàn dân, đánh bại hoàn toàn quân xâm lược.</p>
+            
+            <p>Lần thứ ba (1287-1288): Trận Bạch Đằng lịch sử, nơi ông đã vận dụng chiến thuật cọc nhọn đánh chìm hạm đội Nguyên Mông.</p>
+            
+            <div class="achievements">
+                <h3>Thành tựu nổi bật</h3>
+                <ul>
+                    <li>Ba lần đánh thắng quân Mông - Nguyên xâm lược</li>
+                    <li>Tác giả "Hịch tướng sĩ" - văn bản nổi tiếng về tinh thần yêu nước</li>
+                    <li>Xây dựng chiến thuật quân sự độc đáo</li>
+                    <li>Tổ chức kháng chiến toàn dân</li>
+                    <li>Bảo vệ nền độc lập dân tộc</li>
+                </ul>
+            </div>
+            
+            <p>Trần Hưng Đạo không chỉ là một danh tướng tài ba mà còn là nhà tư tưởng quân sự, nhà giáo dục. Ông đã để lại cho hậu thế những bài học quý báu về nghệ thuật quân sự và tinh thần yêu nước bất khuất.</p>
+        </div>
+    </div>
+
+    <!-- Modal Lý Thường Kiệt -->
+    <div id="heroModal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('heroModal3')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9wmOv0bLO_s5fbrVkl1Xa63jggecVhxx3WA&s" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <div class="modal-title">
+                    <h2>Lý Thường Kiệt</h2>
+                    <div class="modal-period">1019 - 1105</div>
+                </div>
+            </div>
+            
+            <div class="modal-quote">
+                "Nam quốc sơn hà Nam đế cư / Tiệt nhiên định phận tại thiên thư / Như hà nghịch lỗ lai xâm phạm / Nhữ đẳng hành khan thủ bại hư"
+            </div>
+            
+            <p>Lý Thường Kiệt là một danh tướng tài ba của triều Lý, được biết đến như người đầu tiên sáng tác bài thơ khẳng định chủ quyền lãnh thổ của Việt Nam.</p>
+            
+            <h3>Cuộc đời và sự nghiệp</h3>
+            <p>Sinh ra trong một gia đình quý tộc, Lý Thường Kiệt từ nhỏ đã thể hiện tài năng quân sự xuất chúng. Ông được vua Lý Thánh Tông tín nhiệm, giao cho nhiều trọng trách.</p>
+            
+            <p>Năm 1075, khi quân Tống xâm lược, Lý Thường Kiệt đã chủ động tiến công, giành được nhiều thắng lợi quan trọng. Ông đã để lại bài thơ nổi tiếng "Nam quốc sơn hà" trên thành Như Nguyệt (Trung Quốc), khẳng định chủ quyền độc lập của Đại Việt.</p>
+            
+            <div class="achievements">
+                <h3>Thành tựu nổi bật</h3>
+                <ul>
+                    <li>Tác giả bài thơ "Nam quốc sơn hà" đầu tiên khẳng định chủ quyền</li>
+                    <li>Đánh thắng quân Tống xâm lược năm 1075-1077</li>
+                    <li>Xây dựng hệ thống phòng thủ vững chắc</li>
+                    <li>Góp phần ổn định biên cương</li>
+                    <li>Phát triển văn hóa, giáo dục</li>
+                </ul>
+            </div>
+            
+            <p>Lý Thường Kiệt được coi là biểu tượng của tinh thần bảo vệ Tổ quốc và khẳng định chủ quyền dân tộc. Bài thơ "Nam quốc sơn hà" của ông đã trở thành tuyên ngôn độc lập bất hủ của dân tộc Việt Nam.</p>
+        </div>
+    </div>
+
+    <!-- Modal Hai Bà Trưng -->
+    <div id="heroModal4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('heroModal4')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                      <img src="https://hoangthanhthanglong.vn/wp-content/uploads/2023/05/haibatrung2.jpg" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <div class="modal-title">
+                    <h2>Hai Bà Trưng</h2>
+                    <div class="modal-period">Trưng Trắc (14-43), Trưng Nhị (12-43)</div>
+                </div>
+            </div>
+            
+            <div class="modal-quote">
+                "Một phen gây dựng non sông / Một phen lo toan chuyện chống giặc ngoài"
+            </div>
+            
+            <p>Trưng Trắc và Trưng Nhị là hai chị em anh hùng đầu tiên trong lịch sử Việt Nam nổi dậy chống ách thống trị của nhà Hán. Cuộc khởi nghĩa của hai bà đã mở đầu truyền thống đấu tranh anh dũng của phụ nữ Việt Nam.</p>
+            
+            <h3>Cuộc khởi nghĩa Hai Bà Trưng</h3>
+            <p>Năm 40, sau khi chồng Trưng Trắc là Thi Sách bị thái수 Tô Định giết hại, hai chị em đã nổi dậy khởi nghĩa. Cuộc khởi nghĩa nhanh chóng lan rộng, giải phóng 65 thành trì từ Cửu Chân đến Nhật Nam.</p>
+            
+            <p>Trưng Trắc được tôn làm Trưng Nữ Vương, thành lập triều đình độc lập đầu tiên của Việt Nam. Trong 3 năm cầm quyền (40-43), hai bà đã thực hiện nhiều chính sách tiến bộ, giảm thuế, phát triển sản xuất.</p>
+            
+            <div class="achievements">
+                <h3>Thành tựu nổi bật</h3>
+                <ul>
+                    <li>Lãnh đạo cuộc khởi nghĩa đầu tiên chống Bắc thuộc</li>
+                    <li>Giải phóng 65 thành trì, thiết lập nền độc lập</li>
+                    <li>Trưng Trắc trở thành nữ vương đầu tiên</li>
+                    <li>Biểu tượng của phụ nữ Việt Nam anh hùng</li>
+                    <li>Khơi dậy tinh thần đấu tranh dân tộc</li>
+                </ul>
+            </div>
+            
+            <p>Tuy cuộc khởi nghĩa thất bại sau 3 năm, nhưng Hai Bà Trưng đã để lại tấm gương sáng về lòng yêu nước, ý chí bất khuất và tinh thần hi sinh của người phụ nữ Việt Nam.</p>
+        </div>
+    </div>
+
+    <!-- Modal Ngô Quyền -->
+    <div id="heroModal5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('heroModal5')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                     <img src="https://khaiminhduc.edu.vn/wp-content/uploads/2022/07/Vua-Ngo-Quyen-3.jpg" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <div class="modal-title">
+                    <h2>Ngô Quyền</h2>
+                    <div class="modal-period">897 - 944</div>
+                </div>
+            </div>
+            
+            <div class="modal-quote">
+                "Thà chết chống giặc, chứ không chịu làm tôi tớ"
+            </div>
+            
+            <p>Ngô Quyền là vị vua đầu tiên của Việt Nam độc lập sau hơn 1000 năm Bắc thuộc. Ông được biết đến với chiến thắng lịch sử tại sông Bạch Đằng năm 938, mở ra kỷ nguyên độc lập của dân tộc.</p>
+            
+            <h3>Trận Bạch Đằng 938</h3>
+            <p>Sau khi Dương Đình Nghệ bị Kiều Công Tiễn giết hại, Ngô Quyền đã nổi dậy trừng phạt kẻ phản loạn. Khi Kiều Công Tiễn cầu viện Nam Hán, Ngô Quyền đã chuẩn bị chu đáo để đối phó.</p>
+            
+            <p>Tại sông Bạch Đằng, ông đã vận dụng tài tình địa thế, cho đóng cọc nhọn dưới nước theo quy luật thủy triều. Khi thủy quân Nam Hán tiến công, họ đã bị tiêu diệt hoàn toàn, vua Nam Hán là Lưu Hoằng Tháo cũng bỏ mạng.</p>
+            
+            <div class="achievements">
+                <h3>Thành tựu nổi bật</h3>
+                <ul>
+                    <li>Thắng trận Bạch Đằng năm 938, mở ra độc lập dân tộc</li>
+                    <li>Là vua đầu tiên của Việt Nam độc lập</li>
+                    <li>Kết thúc hơn 1000 năm Bắc thuộc</li>
+                    <li>Thiết lập nền tảng cho các triều đại sau</li>
+                    <li>Sáng tạo chiến thuật cọc nhọn trên sông</li>
+                </ul>
+            </div>
+            
+            <p>Ngô Quyền trị vì 6 năm (938-944) và mất khi còn khá trẻ. Tuy thời gian cầm quyền ngắn ngủi, nhưng ông đã mở ra một trang sử mới cho dân tộc Việt Nam, đặt nền móng cho sự phát triển của các triều đại phong kiến độc lập.</p>
+        </div>
+    </div>
+
+    <!-- Modal Lê Lợi -->
+    <div id="heroModal6" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('heroModal6')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                    <img src="https://baotang.thanhhoa.gov.vn/portal/Photos/2015-10-02/db27ccf92718f33dget_img(3).jpg" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <div class="modal-title">
+                    <h2>Lê Lợi</h2>
+                    <div class="modal-period">1385 - 1433</div>
+                </div>
+            </div>
+            
+            <div class="modal-quote">
+                "Việc lớn đã thành, ta có thể yên lòng mà về cùng tổ tiên"
+            </div>
+            
+            <p>Lê Lợi, tức Lê Thái Tổ, là người anh hùng lãnh đạo khởi nghĩa Lam Sơn thành công, đánh đuổi quân Minh xâm lược, tái lập nền độc lập cho Đại Việt sau 20 năm Bắc thuộc lần thứ tư.</p>
+            
+            <h3>Khởi nghĩa Lam Sơn</h3>
+            <p>Năm 1418, xuất phát từ căn cứ Lam Sơn (Thanh Hóa), Lê Lợi cùng các nghĩa sĩ như Nguyễn Trãi, Lê Sát, Lê Lai... đã khởi động cuộc kháng chiến 10 năm chống quân Minh.</p>
+            
+            <p>Với chiến thuật du kích linh hoạt, kết hợp với ngoại giao khéo léo, nghĩa quân Lam Sơn đã từng bước giành thắng lợi. Năm 1427, quân Minh phải rút lui, công nhận độc lập của Đại Việt.</p>
+            
+            <div class="achievements">
+                <h3>Thành tựu nổi bật</h3>
+                <ul>
+                    <li>Lãnh đạo khởi nghĩa Lam Sơn thành công</li>
+                    <li>Đánh đuổi quân Minh, tái lập độc lập</li>
+                    <li>Sáng lập triều Lê, mở ra thời kỳ hưng thịnh</li>
+                    <li>Thực hiện nhiều cải cách tiến bộ</li>
+                    <li>Hợp tác với Nguyễn Trãi xây dựng đất nước</li>
+                </ul>
+            </div>
+            
+            <p>Lê Lợi không chỉ là một anh hùng quân sự mà còn là một nhà lãnh đạo tài ba. Ông đã đặt nền móng cho triều Lê hưng thịnh, tạo điều kiện cho đất nước phát triển mạnh mẽ trong những thế kỷ sau.</p>
+        </div>
+    </div>
+
+    <!-- Modal Bà Triệu -->
+    <div id="heroModal7" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('heroModal7')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                     <img src="https://bizweb.dktcdn.net/100/500/453/files/ba-trieu-03.jpg?v=1699070959700" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <div class="modal-title">
+                    <h2>Bà Triệu</h2>
+                    <div class="modal-period">Triệu Thị Trinh (226 - 248)</div>
+                </div>
+            </div>
+            
+            <div class="modal-quote">
+                "Tôi muốn cưỡi cơn gió mạnh, đạp sóng dữ, chém cá kình ở biển Đông, dọn sạch bờ cõi, cứu dân khỏi cảnh đắm đuối chứ không chịu khom lưng làm tì thiếp cho người"
+            </div>
+            
+            <p>Triệu Thị Trinh, tức Bà Triệu, là nữ anh hùng thời Tam Quốc, người đã lãnh đạo cuộc khởi nghĩa chống lại sự thống trị của Đông Ngô tại vùng đất Giao Châu.</p>
+            
+            <h3>Cuộc khởi nghĩa của Bà Triệu</h3>
+            <p>Năm 248, khi mới 23 tuổi, Bà Triệu đã lãnh đạo cuộc khởi nghĩa ở Cửu Chân (nay là Thanh Hóa). Bà cùng anh trai Triệu Quốc Đạt tập hợp nghĩa quân, thiết lập căn cứ trong rừng núi.</p>
+            
+            <p>Cuộc khởi nghĩa kéo dài 6 tháng, gây nhiều tổn thất cho quân Đông Ngô. Tuy cuối cùng thất bại, nhưng tinh thần bất khuất của Bà Triệu đã trở thành biểu tượng của ý chí đấu tranh dân tộc.</p>
+            
+            <div class="achievements">
+                <h3>Thành tựu nổi bật</h3>
+                <ul>
+                    <li>Lãnh đạo khởi nghĩa chống Đông Ngô năm 248</li>
+                    <li>Biểu tượng của phụ nữ Việt Nam bất khuất</li>
+                    <li>Để lại tấm gương về lòng yêu nước</li>
+                    <li>Khơi dậy tinh thần đấu tranh của nhân dân</li>
+                    <li>Được tôn thờ như một vị thần bảo hộ</li>
+                </ul>
+            </div>
+            
+            <p>Bà Triệu được coi là hiện thân của tinh thần độc lập, tự chủ của phụ nữ Việt Nam. Câu nói nổi tiếng của bà về việc "cưỡi cơn gió mạnh, đạp sóng dữ" đã trở thành khẩu hiệu bất hủ về ý chí tự do và độc lập.</p>
+        </div>
+    </div>
+
+    <!-- Modal Đinh Tiên Hoàng -->
+    <div id="heroModal8" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('heroModal8')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                     <img src="https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2025/1/19/0f7a088e98064cb5a926b4d445b4dd74" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <div class="modal-title">
+                    <h2>Đinh Tiên Hoàng</h2>
+                    <div class="modal-period">Đinh Bộ Lĩnh (924 - 979)</div>
+                </div>
+            </div>
+            
+            <div class="modal-quote">
+                "Ai dám làm loạn, ta sẽ đem quân dẹp tan"
+            </div>
+            
+            <p>Đinh Bộ Lĩnh, tức Đinh Tiên Hoàng, là hoàng đế đầu tiên của nhà Đinh, người đã thống nhất đất nước sau thời kỳ loạn 12 sứ quân, mở đầu cho thời kỳ các triều đại phong kiến tập quyền.</p>
+            
+            <h3>Thống nhất đất nước</h3>
+            <p>Sau khi Ngô Quyền mất, đất nước rơi vào tình trạng chia cắt với 12 sứ quân cát cứ. Đinh Bộ Lĩnh, xuất thân từ Hoa Lư (Ninh Bình), đã dần thống nhất các vùng đất.</p>
+            
+            <p>Năm 968, sau khi đánh bại các sứ quân, Đinh Bộ Lĩnh tự lập làm hoàng đế, lấy niên hiệu Thái Bình, đặt tên nước là Đại Cồ Việt, thiết lập kinh đô tại Hoa Lư.</p>
+            
+            <div class="achievements">
+                <h3>Thành tựu nổi bật</h3>
+                <ul>
+                    <li>Thống nhất đất nước sau loạn 12 sứ quân</li>
+                    <li>Thiết lập nhà Đinh, mở đầu thời kỳ phong kiến tập quyền</li>
+                    <li>Xây dựng kinh đô Hoa Lư vững mạnh</li>
+                    <li>Thiết lập quan hệ ngoại giao với nhà Tống</li>
+                    <li>Đặt nền móng cho sự phát triển lâu dài</li>
+                </ul>
+            </div>
+            
+            <p>Đinh Tiên Hoàng tuy trị vì không lâu (968-979) nhưng đã có công lớn trong việc ổn định chính trị, xây dựng nền tảng cho các triều đại sau. Ông được coi là một trong những vị hoàng đế có tầm nhìn xa trong lịch sử Việt Nam.</p>
+        </div>
+    </div>
+
+    <!-- Modal Hồ Chí Minh -->
+    <div id="heroModal9" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('heroModal9')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                     <img src="https://media.vov.vn/sites/default/files/styles/large/public/2020-08/chu_tich_ho_chi_minh_1_bvii_ylkw.jpg" alt="Vua Quang Trung" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">
+                </div>
+                <div class="modal-title">
+                    <h2>Hồ Chí Minh</h2>
+                    <div class="modal-period">Nguyễn Sinh Cung (1890 - 1969)</div>
+                </div>
+            </div>
+            
+            <div class="modal-quote">
+                "Không có gì quý hơn độc lập tự do"
+            </div>
+            
+            <p>Hồ Chí Minh, tên thật là Nguyễn Sinh Cung, là lãnh tụ vĩ đại của dân tộc Việt Nam, Chủ tịch nước Việt Nam Dân chủ Cộng hòa, người sáng lập Đảng Cộng sản Việt Nam và nước Việt Nam hiện đại.</p>
+            
+            <h3>Cuộc đời cách mạng</h3>
+            <p>Từ năm 1911, Người rời quê hương ra nước ngoài tìm đường cứu nước. Trải qua nhiều quốc gia, Người đã tiếp thu tư tưởng Mác - Lênin, trở thành một nhà cách mạng chuyên nghiệp.</p>
+            
+            <p>Năm 1930, Người thành lập Đảng Cộng sản Việt Nam. Năm 1941, Người về nước lãnh đạo cách mạng, thành lập Việt Minh. Ngày 2/9/1945, Người đọc Tuyên ngôn Độc lập, khai sinh nước Việt Nam Dân chủ Cộng hòa.</p>
+            
+            <div class="achievements">
+                <h3>Thành tựu nổi bật</h3>
+                <ul>
+                    <li>Sáng lập Đảng Cộng sản Việt Nam (1930)</li>
+                    <li>Lãnh đạo Cách mạng Tháng Tám thành công</li>
+                    <li>Đọc Tuyên ngôn Độc lập, thành lập nước VNDCCH</li>
+                    <li>Lãnh đạo kháng chiến chống Pháp và Mỹ</li>
+                    <li>Để lại di sản tư tưởng Hồ Chí Minh vĩ đại</li>
+                </ul>
+            </div>
+            
+            <p>Chủ tịch Hồ Chí Minh không chỉ là một lãnh tụ chính trị tài ba mà còn là một nhà văn hóa, nhà giáo dục, nhà ngoại giao xuất sắc. Tư tưởng, đạo đức, phong cách Hồ Chí Minh đã trở thành nguồn cảm hứng vô tận cho các thế hệ người Việt Nam.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+                
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Add loading animation for cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.hero-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Add parallax effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            if (header) {
+                header.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Add hover sound effect (optional)
+        document.querySelectorAll('.hero-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
