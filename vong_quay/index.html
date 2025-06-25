@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vòng quay may mắn</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<div class="input-section">
+  <h3>Nhập nội dung cho vòng quay:</h3>
+  <input type="text" id="item0" placeholder="Ô 1" value="100">
+  <input type="text" id="item1" placeholder="Ô 2" value="200">
+  <input type="text" id="item2" placeholder="Ô 3" value="300">
+  <input type="text" id="item3" placeholder="Ô 4" value="400">
+  <input type="text" id="item4" placeholder="Ô 5" value="500">
+  <input type="text" id="item5" placeholder="Ô 6" value="600">
+  <button onclick="updateWheel()">Cập nhật</button>
+</div>
+  <div class="container">
+	
+     
+	
+       
+    <div class="wheel" >
+      
+      <div class="item" style="--i:0; --clr: #ff7675;">100</div>
+      <div class="item" style="--i:1; --clr: #74b9ff;">200</div>
+      <div class="item" style="--i:2; --clr: #55efc4;">300</div>
+      <div class="item" style="--i:3; --clr: #ffeaa7;">400</div>
+      <div class="item" style="--i:4; --clr: #fd79a8;">500</div>
+      <div class="item" style="--i:5; --clr: #a29bfe;">600</div>
+    </div>
+	  <div class ="spin">quay</div>	
+  
+  </div>
+
+  
+  <script>
+    let wheel = document.querySelector(".wheel");
+    let spin = document.querySelector(".spin");
+    spin.onclick = function() {
+        let value = Math.ceil(Math.random() * 3600)
+        wheel.style.transform = "rotate(" + value + "deg)";
+    }
+	function updateWheel() {
+  for(let i = 0; i < 6; i++) {
+    let input = document.getElementById('item' + i);
+    let wheelItem = document.querySelector('.item[style*="--i:' + i + '"]');
+    wheelItem.textContent = input.value;
+  }
+}
+</script>
+</body>
+</html>
