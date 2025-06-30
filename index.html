@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời tiết Nha Trang - Dự báo 7 ngày</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation Menu */
+        .navbar {
+            background: rgba(0,0,0,0.9);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-item a:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .nav-item a.active {
+            background: #3498db;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* Weather Cards */
+        .weather-current {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .current-temp {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .current-desc {
+            font-size: 1.4rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .weather-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .detail-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .detail-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Forecast Section */
+        .forecast-section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .forecast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .forecast-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .forecast-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .forecast-day {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .forecast-icon {
+            font-size: 2.5rem;
+            margin: 15px 0;
+        }
+
+        .forecast-temp {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .forecast-temp .high {
+            font-weight: bold;
+        }
+
+        .forecast-temp .low {
+            color: #7f8c8d;
+        }
+
+        .forecast-desc {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        /* Weather Alerts */
+        .weather-alert {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+
+        .alert-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Hourly Forecast */
+        .hourly-section {
+            margin-top: 40px;
+        }
+
+        .hourly-scroll {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scrollbar-width: thin;
+        }
+
+        .hourly-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .hourly-scroll::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .hourly-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+        }
+
+        .hourly-item {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 120px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .hourly-time {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .hourly-icon {
+            font-size: 1.8rem;
+            margin: 10px 0;
+        }
+
+        .hourly-temp {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .current-temp {
+                font-size: 3rem;
+            }
+            
+            .weather-details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .forecast-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">🏖️ NHA TRANG</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Trang chủ</a></li>
+                <li class="nav-item"><a href="#" class="active">Thời tiết</a></li>
+                <li class="nav-item"><a href="transport.html">Di chuyển</a></li>
+                <li class="nav-item"><a href="tips.html">Kinh nghiệm</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Thời tiết Nha Trang -->
+        <div id="weather-info" style="text-align:center; margin-bottom: 30px;">
+            <span id="weather-temp" style="font-size:3rem; font-weight:bold; color:#34495e;"></span><br>
+            <span id="weather-desc" style="font-size:1.2rem; color:#888;"></span>
+        </div>
+        <script>
+            // Ví dụ: hiển thị nhiệt độ và trạng thái thời tiết
+            document.getElementById('weather-temp').innerText = "28°C";
+            document.getElementById('weather-desc').innerText = "Nắng ít mây";
+        </script>
+
+        <div class="header">
+            <h1>🌤️ THỜI TIẾT NHA TRANG</h1>
+            <p>Dự báo thời tiết hàng ngày - Cập nhật mới nhất</p>
+        </div>
+
+        <!-- Weather Alert -->
+        <div class="weather-alert" id="weatherAlert" style="display: none;">
+            <div class="alert-icon">⚠️</div>
+            <h3>Cảnh báo thời tiết</h3>
+            <p id="alertMessage">Có thể có mưa lớn trong chiều nay</p>
+        </div>
+
+        <!-- Current Weather -->
+        <div class="weather-current">
+            <div class="current-temp" id="currentTemp">28°C</div>
+            <div class="current-desc" id="currentDesc">Nắng ít mây</div>
+            <div class="weather-details">
+                <div class="detail-item">
+                    <div class="detail-icon">💨</div>
+                    <div class="detail-label">Gió</div>
+                    <div class="detail-value" id="windSpeed">15 km/h</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">💧</div>
+                    <div class="detail-label">Độ ẩm</div>
+                    <div class="detail-value" id="humidity">75%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">👁️</div>
+                    <div class="detail-label">Tầm nhìn</div>
+                    <div class="detail-value" id="visibility">10 km</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon">🌡️</div>
+                    <div class="detail-label">Cảm giác</div>
+                    <div class="detail-value" id="feelsLike">32°C</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hourly Forecast -->
+        <div class="hourly-section">
+            <h2 class="section-title">🕐 Dự báo theo giờ</h2>
+            <div class="hourly-scroll" id="hourlyForecast">
+                <!-- Hourly items will be generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- 7-Day Forecast -->
+        <div class="forecast-section">
+            <h2 class="section-title">📅 Dự báo 7 ngày</h2>
+            <div class="forecast-grid" id="forecastGrid">
+                <!-- Forecast cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu thời tiết mẫu (trong thực tế sẽ lấy từ API)
+        const weatherData = {
+            current: {
+                temp: 28,
+                desc: "Nắng ít mây",
+                wind: 15,
+                humidity: 75,
+                visibility: 10,
+                feelsLike: 32,
+                icon: "☀️"
+            },
+            hourly: [
+                { time: "9:00", temp: 26, icon: "🌤️" },
+                { time: "12:00", temp: 30, icon: "☀️" },
+                { time: "15:00", temp: 32, icon: "☀️" },
+                { time: "18:00", temp: 28, icon: "🌤️" },
+                { time: "21:00", temp: 25, icon: "🌙" },
+                { time: "00:00", temp: 24, icon: "🌙" },
+                { time: "03:00", temp: 23, icon: "🌙" },
+                { time: "06:00", temp: 25, icon: "🌅" }
+            ],
+            forecast: [
+                { day: "Hôm nay", high: 32, low: 24, desc: "Nắng ít mây", icon: "☀️" },
+                { day: "Ngày mai", high: 30, low: 22, desc: "Có mây", icon: "⛅" },
+                { day: "Thứ 7", high: 28, low: 21, desc: "Mưa nhẹ", icon: "🌦️" },
+                { day: "Chủ nhật", high: 29, low: 23, desc: "Nắng gián đoạn", icon: "🌤️" },
+                { day: "Thứ 2", high: 31, low: 25, desc: "Nắng", icon: "☀️" },
+                { day: "Thứ 3", high: 33, low: 26, desc: "Nắng nóng", icon: "🌞" },
+                { day: "Thứ 4", high: 29, low: 24, desc: "Mưa rào", icon: "🌧️" }
+            ]
+        };
+
+        function updateCurrentWeather() {
+            const current = weatherData.current;
+            document.getElementById('currentTemp').textContent = `${current.temp}°C`;
+            document.getElementById('currentDesc').textContent = current.desc;
+            document.getElementById('windSpeed').textContent = `${current.wind} km/h`;
+            document.getElementById('humidity').textContent = `${current.humidity}%`;
+            document.getElementById('visibility').textContent = `${current.visibility} km`;
+            document.getElementById('feelsLike').textContent = `${current.feelsLike}°C`;
+        }
+
+        function generateHourlyForecast() {
+            const hourlyContainer = document.getElementById('hourlyForecast');
+            hourlyContainer.innerHTML = '';
+            
+            weatherData.hourly.forEach(hour => {
+                const hourlyItem = document.createElement('div');
+                hourlyItem.className = 'hourly-item';
+                hourlyItem.innerHTML = `
+                    <div class="hourly-time">${hour.time}</div>
+                    <div class="hourly-icon">${hour.icon}</div>
+                    <div class="hourly-temp">${hour.temp}°C</div>
+                `;
+                hourlyContainer.appendChild(hourlyItem);
+            });
+        }
+
+        function generateForecast() {
+            const forecastContainer = document.getElementById('forecastGrid');
+            forecastContainer.innerHTML = '';
+            
+            weatherData.forecast.forEach(forecast => {
+                const forecastCard = document.createElement('div');
+                forecastCard.className = 'forecast-card';
+                forecastCard.innerHTML = `
+                    <div class="forecast-day">${forecast.day}</div>
+                    <div class="forecast-icon">${forecast.icon}</div>
+                    <div class="forecast-temp">
+                        <span class="high">${forecast.high}°</span> / 
+                        <span class="low">${forecast.low}°</span>
+                    </div>
+                    <div class="forecast-desc">${forecast.desc}</div>
+                `;
+                forecastContainer.appendChild(forecastCard);
+            });
+        }
+
+        function checkWeatherAlerts() {
+            // Kiểm tra cảnh báo thời tiết
+            const alerts = [
+                { condition: 'rain', message: 'Có thể có mưa lớn trong chiều nay' },
+                { condition: 'wind', message: 'Gió mạnh từ 20-25 km/h' }
+            ];
+            
+            // Hiển thị cảnh báo nếu có
+            if (Math.random() > 0.7) { // 30% chance to show alert
+                const alert = alerts[Math.floor(Math.random() * alerts.length)];
+                document.getElementById('weatherAlert').style.display = 'block';
+                document.getElementById('alertMessage').textContent = alert.message;
+            }
+        }
+
+        function updateDateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('vi-VN', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            const dateString = now.toLocaleDateString('vi-VN', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Cập nhật thời gian trong header
+            document.querySelector('.header p').innerHTML = 
+                `Dự báo thời tiết hàng ngày - Cập nhật lúc ${timeString}<br>${dateString}`;
+        }
+
+        // Khởi tạo trang
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrentWeather();
+            generateHourlyForecast();
+            generateForecast();
+            checkWeatherAlerts();
+            updateDateTime();
+            
+            // Cập nhật thời gian mỗi phút
+            setInterval(updateDateTime, 60000);
+            
+            // Mô phỏng cập nhật dữ liệu thời tiết mỗi 5 phút
+            setInterval(function() {
+                // Thay đổi nhỏ nhiệt độ
+                weatherData.current.temp += Math.floor(Math.random() * 3) - 1;
+                weatherData.current.humidity += Math.floor(Math.random() * 5) - 2;
+                updateCurrentWeather();
+            }, 300000); // 5 phút
+        });
+
+        // Thêm hiệu ứng click cho các thẻ dự báo
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.forecast-card')) {
+                const card = e.target.closest('.forecast-card');
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 150);
+            }
+        });
+
+        // Làm mới dữ liệu thời tiết
+        function refreshWeather() {
+            // Hiển thị loading
+            document.getElementById('currentTemp').textContent = 'Đang tải...';
+            
+            // Mô phỏng việc tải dữ liệu
+            setTimeout(() => {
+                updateCurrentWeather();
+                generateHourlyForecast();
+                generateForecast();
+            }, 1000);
+        }
+
+        // Thêm nút refresh (có thể thêm vào HTML nếu cần)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
+                e.preventDefault();
+                refreshWeather();
+            }
+        });
+    </script>
+</body>
+</html>
