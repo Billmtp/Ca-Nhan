@@ -130,7 +130,7 @@ body{
   margin-left:250px;
   margin-top:150px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, 400px);
   column-gap: 10px;
   
 
