@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ Nha Trang</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function toggleMenu() {
+      var menu = document.querySelector(".nav-menu");
+      menu.classList.toggle("active");
+    }
+
+    window.onclick = function(event) {
+      var modals = document.querySelectorAll(".modal");
+      modals.forEach(function(modal) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    };
+  </script>
+</head>
+<body>
+
+<!-- MENU -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#" class="nav-logo">🏖️ NHA TRANG</a>
+    <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+    <ul class="nav-menu">
+      <li><a href="index.html" class="active">Trang chủ</a></li>
+      <li><a href="thoitiet.html">Thời tiết</a></li>
+      <li><a href="dichuyen.html">Di chuyển</a></li>
+      <li><a href="khachsan.html">Khách sạn</a></li>
+      <li><a href="kinhnghiem.html">Kinh nghiệm</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- NỘI DUNG CHÍNH -->
+<header class="header">
+  <h1>Khám phá Nha Trang</h1>
+  <p>Thành phố biển xinh đẹp với nhiều điểm du lịch hấp dẫn</p>
+</header>
+
+<section class="section">
+  <h2>Địa điểm nổi bật</h2>
+  <div class="card-container">
+    <div class="card" onclick="openModal('ponagar')">🛕 Tháp Bà Ponagar</div>
+    <div class="card" onclick="openModal('honchong')">🌊 Hòn Chồng</div>
+    <div class="card" onclick="openModal('dambaynoi')">🏝️ Đầm Bấy</div>
+    <div class="card" onclick="openModal('bandao')">🏞️ Bán đảo Đầm Môn</div>
+    <div class="card" onclick="openModal('yangbay')">🌳 Thác Yang Bay</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Ẩm thực đặc sắc</h2>
+  <div class="card-container">
+    <div class="card" onclick="openModal('banhcan')">🥧 Bánh căn</div>
+    <div class="card" onclick="openModal('nemninh')">🥓 Nem nướng</div>
+    <div class="card" onclick="openModal('banhxeo')">🍤 Bánh xèo mực</div>
+    <div class="card" onclick="openModal('bunbo')">🍜 Bún bò</div>
+    <div class="card" onclick="openModal('chaclam')">🐟 Chả cá</div>
+  </div>
+</section>
+
+<!-- POPUP MODALS -->
+<div id="ponagar" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('ponagar')">&times;</span>
+    <h2>🛕 Tháp Bà Ponagar</h2>
+    <p>Quần thể đền tháp Chăm cổ linh thiêng, kiến trúc đặc trưng văn hóa Chăm Pa.</p>
+  </div>
+</div>
+
+<div id="honchong" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('honchong')">&times;</span>
+    <h2>🌊 Hòn Chồng</h2>
+    <p>Điểm ngắm biển tuyệt đẹp với bãi đá kỳ thú và truyền thuyết thú vị.</p>
+  </div>
+</div>
+
+<div id="dambaynoi" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('dambaynoi')">&times;</span>
+    <h2>🏝️ Đầm Bấy</h2>
+    <p>Bãi biển hoang sơ, nước trong xanh – lý tưởng cho lặn ngắm san hô.</p>
+  </div>
+</div>
+
+<div id="bandao" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('bandao')">&times;</span>
+    <h2>🏞️ Bán đảo Đầm Môn</h2>
+    <p>Vùng đất yên bình, nơi đón ánh mặt trời đầu tiên của Việt Nam.</p>
+  </div>
+</div>
+
+<div id="yangbay" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('yangbay')">&times;</span>
+    <h2>🌳 Thác Yang Bay</h2>
+    <p>Thác nước giữa rừng xanh, có khu du lịch sinh thái, suối khoáng, trò chơi dân gian.</p>
+  </div>
+</div>
+
+<!-- Ẩm thực -->
+<div id="banhcan" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('banhcan')">&times;</span>
+    <h2>🥧 Bánh căn</h2>
+    <p>Bánh nhỏ tròn, đổ trong khuôn đất nung, ăn cùng nước chấm đặc trưng.</p>
+  </div>
+</div>
+
+<div id="nemninh" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('nemninh')">&times;</span>
+    <h2>🥓 Nem nướng</h2>
+    <p>Món đặc sản Ninh Hòa, ăn kèm rau sống, bánh tráng và nước chấm đậm đà.</p>
+  </div>
+</div>
+
+<div id="banhxeo" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('banhxeo')">&times;</span>
+    <h2>🍤 Bánh xèo mực</h2>
+    <p>Bánh giòn rụm, nhân mực tươi, ăn nóng cùng rau sống và nước mắm tỏi ớt.</p>
+  </div>
+</div>
+
+<div id="bunbo" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('bunbo')">&times;</span>
+    <h2>🍜 Bún bò</h2>
+    <p>Khác với bún bò Huế – vị nhẹ, nước trong, ăn kèm rau sống và chả cá.</p>
+  </div>
+</div>
+
+<div id="chaclam" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('chaclam')">&times;</span>
+    <h2>🐟 Chả cá</h2>
+    <p>Đặc sản từ cá tươi, dai ngọt, dùng với bún hoặc bánh mì. Món không thể bỏ qua khi đến Nha Trang.</p>
+  </div>
+</div>
+
+</body>
+</html>

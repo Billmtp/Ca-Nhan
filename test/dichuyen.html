@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di chuyển - Nha Trang</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">🏖️ NHA TRANG</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Trang chủ</a></li>
+                <li class="nav-item"><a href="#">Thời tiết</a></li>
+                <li class="nav-item"><a href="transport.html" class="active">Di chuyển</a></li>
+                <li class="nav-item"><a href="tips.html">Kinh nghiệm</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>🚗 DI CHUYỂN</h1>
+            <p>Hướng dẫn di chuyển đến và trong Nha Trang</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">✈️ ĐẾN NHA TRANG</h2>
+            <div class="grid">
+                <div class="card" onclick="openModal('plane')">
+                    <h3><span class="icon">✈️</span>Máy bay</h3>
+                    <p>Sân bay Cam Ranh - Cách trung tâm Nha Trang 35km</p>
+                </div>
+
+                <div class="card" onclick="openModal('train')">
+                    <h3><span class="icon">🚆</span>Tàu hỏa</h3>
+                    <p>Ga Nha Trang - Trung tâm thành phố, thuận tiện di chuyển</p>
+                </div>
+
+                <div class="card" onclick="openModal('bus')">
+                    <h3><span class="icon">🚌</span>Xe khách</h3>
+                    <p>Bến xe Lê Hồng Phong - Nhiều tuyến từ các tỉnh thành</p>
+                </div>
+
+                <div class="card" onclick="openModal('car')">
+                    <h3><span class="icon">🚗</span>Ô tô cá nhân</h3>
+                    <p>Di chuyển bằng xe riêng qua quốc lộ 1A</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🏍️ DI CHUYỂN TRONG THÀNH PHỐ</h2>
+            <div class="grid">
+                <div class="card" onclick="openModal('motorbike')">
+                    <h3><span class="icon">🏍️</span>Xe máy</h3>
+                    <p>Thuê xe máy - Phương tiện phổ biến và tiện lợi nhất</p>
+                </div>
+
+                <div class="card" onclick="openModal('taxi')">
+                    <h3><span class="icon">🚕</span>Taxi & Grab</h3>
+                    <p>Taxi truyền thống và ứng dụng gọi xe</p>
+                </div>
+
+                <div class="card" onclick="openModal('cyclo')">
+                    <h3><span class="icon">🚲</span>Xích lô</h3>
+                    <p>Trải nghiệm du lịch truyền thống, thú vị</p>
+                </div>
+
+                <div class="card" onclick="openModal('bicycle')">
+                    <h3><span class="icon">🚴</span>Xe đạp</h3>
+                    <p>Thuê xe đạp dạo phố, thân thiện môi trường</p>
+                </div>
+
+                <div class="card" onclick="openModal('bus_city')">
+                    <h3><span class="icon">🚌</span>Xe buýt thành phố</h3>
+                    <p>Phương tiện công cộng giá rẻ</p>
+                </div>
+
+                <div class="card" onclick="openModal('boat')">
+                    <h3><span class="icon">⛵</span>Thuyền & Cano</h3>
+                    <p>Di chuyển ra các đảo và tour du lịch biển</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Máy bay -->
+    <div id="plane" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✈️ Di chuyển bằng máy bay</h2>
+                <p>Sân bay Cam Ranh</p>
+                <span class="close" onclick="closeModal('plane')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="highlight">
+                    <h3>📍 Thông tin sân bay</h3>
+                    <p><strong>Tên:</strong> Sân bay quốc tế Cam Ranh</p>
+                    <p><strong>Cách trung tâm:</strong> 35km (45 phút di chuyển)</p>
+                    <p><strong>Mã sân bay:</strong> CXR</p>
+                </div>
+
+                <h3>🛫 Các hãng hàng không</h3>
+                <ul>
+                    <li>Vietnam Airlines</li>
+                    <li>Vietjet Air</li>
+                    <li>Bamboo Airways</li>
+                    <li>Jetstar Pacific</li>
+                </ul>
+
+                <h3>🚌 Từ sân bay về trung tâm</h3>
+                <table class="route-table">
+                    <tr>
+                        <th>Phương tiện</th>
+                        <th>Giá tiền</th>
+                        <th>Thời gian</th>
+                    </tr>
+                    <tr>
+                        <td>Xe buýt sân bay</td>
+                        <td>50.000 VNĐ</td>
+                        <td>60 phút</td>
+                    </tr>
+                    <tr>
+                        <td>Taxi</td>
+                        <td>350.000 - 450.000 VNĐ</td>
+                        <td>45 phút</td>
+                    </tr>
+                    <tr>
+                        <td>Grab</td>
+                        <td>300.000 - 400.000 VNĐ</td>
+                        <td>45 phút</td>
+                    </tr>
+                </table>
+
+                <div class="address">
+                    <strong>💡 Lưu ý:</strong> Nên đặt vé trước 1-2 tháng để có giá tốt. Kiểm tra thời tiết trước khi bay.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tàu hỏa -->
+    <div id="train" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🚆 Di chuyển bằng tàu hỏa</h2>
+                <p>Ga Nha Trang</p>
+                <span class="close" onclick="closeModal('train')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="highlight">
+                    <h3>📍 Thông tin ga tàu</h3>
+                    <p><strong>Địa chỉ:</strong> 17 Thái Nguyên, Phước Tân</p>
+                    <p><strong>Cách trung tâm:</strong> 2km</p>
+                </div>
+
+                <h3>🚆 Các tuyến tàu phổ biến</h3>
+                <table class="route-table">
+                    <tr>
+                        <th>Tuyến</th>
+                        <th>Thời gian</th>
+                        <th>Giá vé (ghế ngồi)</th>
+                    </tr>
+                    <tr>
+                        <td>Hà Nội - Nha Trang</td>
+                        <td>24-26 giờ</td>
+                        <td>400.000 - 800.000 VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td>Sài Gòn - Nha Trang</td>
+                        <td>7-8 giờ</td>
+                        <td>150.000 - 300.000 VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td>Đà Nẵng - Nha Trang</td>
+                        <td>10-12 giờ</td>
+                        <td>200.000 - 400.000 VNĐ</td>
+                    </tr>
+                </table>
+
+                <h3>🎫 Loại vé</h3>
+                <ul>
+                    <li>Ghế ngồi cứng/mềm</li>
+                    <li>Giường nằm khoang 6</li>
+                    <li>Giường nằm khoang 4</li>
+                    <li>Giường nằm VIP</li>
+                </ul>
+
+                <div class="address">
+                    <strong>🎟️ Đặt vé:</strong> Có thể đặt online qua dsvn.vn hoặc mua trực tiếp tại ga.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Xe máy -->
+    <div id="motorbike" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏍️ Thuê xe máy</h2>
+                <p>Phương tiện di chuyển phổ biến</p>
+                <span class="close" onclick="closeModal('motorbike')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="highlight">
+                    <h3>💰 Giá thuê xe máy</h3>
+                    <p class="price">Xe số: 120.000 - 150.000 VNĐ/ngày</p>
+                    <p class="price">Xe tay ga: 150.000 - 200.000 VNĐ/ngày</p>
+                    <p class="price">Xe côn tay: 200.000 - 250.000 VNĐ/ngày</p>
+                </div>
+
+                <h3>📋 Giấy tờ cần thiết</h3>
+                <ul>
+                    <li>CMND/CCCD hoặc Passport</li>
+                    <li>Giấy phép lái xe (nếu có)</li>
+                    <li>Tiền đặt cọc: 1-3 triệu VNĐ</li>
+                </ul>
+
+                <h3>🏪 Địa chỉ thuê xe uy tín</h3>
+                <ul>
+                    <li><strong>Thủy Motorbike:</strong> 8A Hùng Vương</li>
+                    <li><strong>Nha Trang Bike Rental:</strong> 12 Biet Thu</li>
+                    <li><strong>Anna Motorbike:</strong> 6/3A Tran Quang Khai</li>
+                </ul>
+
+                <div class="address">
+                    <strong>⚠️ Lưu ý an toàn:</strong>
+                    <br>• Luôn đội mũ bảo hiểm
+                    <br>• Kiểm tra xe trước khi nhận
+                    <br>• Không lái xe khi uống rượu bia
+                    <br>• Tuân thủ luật giao thông
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Taxi -->
+    <div id="taxi" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🚕 Taxi & Grab</h2>
+                <p>Dịch vụ taxi và ứng dụng gọi xe</p>
+                <span class="close" onclick="closeModal('taxi')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🚕 Các hãng taxi uy tín</h3>
+                <table class="route-table">
+                    <tr>
+                        <th>Hãng taxi</th>
+                        <th>Số điện thoại</th>
+                        <th>Giá cước</th>
+                    </tr>
+                    <tr>
+                        <td>Mai Linh</td>
+                        <td>0258.3826.826</td>
+                        <td>11.000-15.000 VNĐ/km</td>
+                    </tr>
+                    <tr>
+                        <td>Vinasun</td>
+                        <td>0258.3811.811</td>
+                        <td>12.000-16.000 VNĐ/km</td>
+                    </tr>
+                    <tr>
+                        <td>Khanh Hoa</td>
+                        <td>0258.3810.810</td>
+                        <td>10.000-14.000 VNĐ/km</td>
+                    </tr>
+                </table>
+
+                <div class="highlight">
+                    <h3>📱 Ứng dụng gọi xe</h3>
+                    <p><strong>Grab:</strong> Phổ biến nhất, nhiều loại xe</p>
+                    <p><strong>Be:</strong> Giá cạnh tranh</p>
+                    <p><strong>Gojek:</strong> Dịch vụ đa dạng</p>
+                </div>
+
+                <h3>💰 Ước tính giá cước phổ biến</h3>
+                <ul>
+                    <li>Sân bay - Trung tâm: 350.000 - 450.000 VNĐ</li>
+                    <li>Trung tâm - Vinpearl: 80.000 - 120.000 VNĐ</li>
+                    <li>Trung tâm - Tháp Bà: 50.000 - 80.000 VNĐ</li>
+                    <li>Trong nội thành: 30.000 - 100.000 VNĐ</li>
+                </ul>
+
+                <div class="address">
+                    <strong>💡 Tips:</strong> Sử dụng Grab để biết giá trước. Với taxi truyền thống, yêu cầu bật đồng hồ.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thuyền -->
+    <div id="boat" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⛵ Thuyền & Cano</h2>
+                <p>Di chuyển ra đảo và tour biển</p>
+                <span class="close" onclick="closeModal('boat')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🏝️ Các tuyến đảo phổ biến</h3>
+                <table class="route-table">
+                    <tr>
+                        <th>Tuyến</th>
+                        <th>Thời gian</th>
+                        <th>Giá vé</th>
+                    </tr>
+                    <tr>
+                        <td>Hòn Tre (Vinpearl)</td>
+                        <td>15 phút</td>
+                        <td>50.000 VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td>4 Đảo (Tour)</td>
+                        <td>Cả ngày</td>
+                        <td>150.000 - 300.000 VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td>Đảo Khỉ</td>
+                        <td>45 phút</td>
+                        <td>200.000 VNĐ</td>
+                    </tr>
+                </table>
+
+                <div class="highlight">
+                    <h3>🎣 Các loại tour biển</h3>
+                    <p><strong>Tour 4 đảo:</strong> Hòn Mun, Hòn Tằm, Hòn Tre, Hòn Miễu</p>
+                    <p><strong>Tour câu cá:</strong> Trải nghiệm câu cá biển</p>
+                    <p><strong>Tour lặn ngắm san hô:</strong> Hòn Mun</p>
+                </div>
+
+                <h3>📍 Điểm khởi hành</h3>
+                <ul>
+                    <li>Cầu tàu Du lịch (Trần Phú)</li>
+                    <li>Bến thuyền Hòn Chồng</li>
+                    <li>Marina Nha Trang</li>
+                </ul>
+
+                <div class="address">
+                    <strong>🌊 Lưu ý:</strong> Kiểm tra thời tiết trước khi đi tour. Mang theo thuốc say sóng nếu cần.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Đóng modal khi click bên ngoài
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Hiệu ứng cuộn mượt
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

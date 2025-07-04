@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinh nghiệm du lịch Nha Trang</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">🏖️ NHA TRANG</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html">Trang chủ</a></li>
+                <li class="nav-item"><a href="#">Thời tiết</a></li>
+                <li class="nav-item"><a href="transport.html">Di chuyển</a></li>
+                <li class="nav-item"><a href="tips.html" class="active">Kinh nghiệm</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>💡 KINH NGHIỆM DU LỊCH</h1>
+            <p>Bí kíp du lịch Nha Trang tiết kiệm và trọn vẹn</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🗓️ THỜI GIAN & KẾ HOẠCH</h2>
+            <div class="grid">
+                <div class="card" onclick="openModal('timing')">
+                    <h3><span class="icon">📅</span>Thời điểm du lịch tốt nhất</h3>
+                    <p>Chọn thời gian lý tưởng để tận hưởng trọn vẹn chuyến đi Nha Trang</p>
+                </div>
+
+                <div class="card" onclick="openModal('duration')">
+                    <h3><span class="icon">⏰</span>Kế hoạch theo số ngày</h3>
+                    <p>Lịch trình chi tiết cho chuyến đi 2-3-4 ngày phù hợp với mọi nhu cầu</p>
+                </div>
+
+                <div class="card" onclick="openModal('budget')">
+                    <h3><span class="icon">💰</span>Ngân sách và chi phí</h3>
+                    <p>Ước tính chi phí từ tiết kiệm đến cao cấp cho chuyến du lịch</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🎒 CHUẨN BỊ & ĐÓNG GÓI</h2>
+            <div class="grid">
+                <div class="card" onclick="openModal('packing')">
+                    <h3><span class="icon">🧳</span>Đồ cần thiết</h3>
+                    <p>Check-list đầy đủ những vật dụng cần mang theo</p>
+                </div>
+
+                <div class="card" onclick="openModal('documents')">
+                    <h3><span class="icon">📋</span>Giấy tờ cần thiết</h3>
+                    <p>Những giấy tờ quan trọng không thể thiếu trong chuyến đi</p>
+                </div>
+
+                <div class="card" onclick="openModal('clothes')">
+                    <h3><span class="icon">👕</span>Trang phục phù hợp</h3>
+                    <p>Lựa chọn quần áo phù hợp với khí hậu và hoạt động</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🏖️ HOẠT ĐỘNG & TRẢI NGHIỆM</h2>
+            <div class="grid">
+                <div class="card" onclick="openModal('beaches')">
+                    <h3><span class="icon">🌊</span>Bí kíp tắm biển</h3>
+                    <p>An toàn và tận hưởng trọn vẹn những bãi biển đẹp nhất</p>
+                </div>
+
+                <div class="card" onclick="openModal('water-sports')">
+                    <h3><span class="icon">🏄</span>Thể thao nước</h3>
+                    <p>Khám phá các hoạt động thể thao nước hấp dẫn</p>
+                </div>
+
+                <div class="card" onclick="openModal('photography')">
+                    <h3><span class="icon">📸</span>Chụp ảnh đẹp</h3>
+                    <p>Bí quyết chụp ảnh sống ảo tại những địa điểm hot nhất</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🚨 LƯU Ý QUAN TRỌNG</h2>
+            <div class="grid">
+                <div class="card" onclick="openModal('safety')">
+                    <h3><span class="icon">🛡️</span>An toàn du lịch</h3>
+                    <p>Những lưu ý quan trọng để đảm bảo chuyến đi an toàn</p>
+                </div>
+
+                <div class="card" onclick="openModal('scams')">
+                    <h3><span class="icon">⚠️</span>Tránh bị lừa đảo</h3>
+                    <p>Nhận biết và tránh các chiêu trò lừa đảo thường gặp</p>
+                </div>
+
+                <div class="card" onclick="openModal('local-customs')">
+                    <h3><span class="icon">🤝</span>Văn hóa địa phương</h3>
+                    <p>Tìm hiểu phong tục tập quán để hòa nhập với người dân địa phương</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thời điểm du lịch -->
+    <div id="timing" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📅 Thời điểm du lịch tốt nhất</h2>
+                <p>Chọn thời gian lý tưởng cho chuyến đi</p>
+                <span class="close" onclick="closeModal('timing')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="highlight">
+                    <h3>🌟 Thời gian lý tưởng nhất</h3>
+                    <p><strong>Tháng 2-8:</strong> Thời tiết đẹp, ít mưa, nắng vừa phải</p>
+                    <p><strong>Đặc biệt tốt:</strong> Tháng 3-5 và tháng 7-8</p>
+                </div>
+
+                <h3>🌤️ Thời tiết theo mùa</h3>
+                <ul>
+                    <li><strong>Mùa khô (1-8):</strong> Nắng đẹp, ít mưa, thích hợp tắm biển</li>
+                    <li><strong>Mùa mưa (9-12):</strong> Mưa nhiều, sóng lớn, ít thích hợp tắm biển</li>
+                </ul>
+
+                <h3>💰 Chi phí theo mùa</h3>
+                <ul>
+                    <li><strong>Cao điểm:</strong> Tết Nguyên đán, hè (6-8), lễ 30/4-1/5</li>
+                    <li><strong>Thấp điểm:</strong> Tháng 1, 2, 9, 10, 11</li>
+                </ul>
+
+                <div class="tip-box">
+                    <strong>💡 Mẹo hay:</strong> Du lịch vào tháng 3-4 để có thời tiết đẹp và giá cả hợp lý nhất.
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Tránh:</strong> Tháng 10-12 do mưa bão nhiều, biển động.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal kế hoạch theo số ngày -->
+    <div id="duration" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⏰ Kế hoạch theo số ngày</h2>
+                <p>Lịch trình chi tiết cho chuyến đi</p>
+                <span class="close" onclick="closeModal('duration')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🏖️ Chuyến đi 2 ngày 1 đêm</h3>
+                <ul>
+                    <li><strong>Ngày 1:</strong> Tháp Bà Ponagar → Bãi biển Nha Trang → Chợ Đầm</li>
+                    <li><strong>Ngày 2:</strong> Vinpearl Land → Hòn Chồng → Bay về</li>
+                </ul>
+
+                <h3>🎢 Chuyến đi 3 ngày 2 đêm</h3>
+                <ul>
+                    <li><strong>Ngày 1:</strong> Đến Nha Trang → Check-in → Bãi biển</li>
+                    <li><strong>Ngày 2:</strong> Tour 4 đảo → Tắm bùn k광천</li>
+                    <li><strong>Ngày 3:</strong> Vinpearl Land → Mua sắm → Bay về</li>
+                </ul>
+
+                <h3>🌊 Chuyến đi 4 ngày 3 đêm</h3>
+                <ul>
+                    <li><strong>Ngày 1:</strong> Đến → Tháp Bà Ponagar → Bãi biển</li>
+                    <li><strong>Ngày 2:</strong> Tour 4 đảo → Tắm bùn</li>
+                    <li><strong>Ngày 3:</strong> Vinpearl Land → Hòn Chồng</li>
+                    <li><strong>Ngày 4:</strong> Yang Bay → Mua sắm → Bay về</li>
+                </ul>
+
+                <div class="highlight">
+                    <h3>📍 Gợi ý lộ trình tối ưu</h3>
+                    <p><strong>Sáng:</strong> Tham quan, chụp ảnh</p>
+                    <p><strong>Chiều:</strong> Tắm biển, thể thao nước</p>
+                    <p><strong>Tối:</strong> Ăn uống, khám phá ẩm thực</p>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Lưu ý:</strong> Book trước vé Vinpearl và các tour để được giá tốt hơn.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal ngân sách -->
+    <div id="budget" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💰 Ngân sách và chi phí</h2>
+                <p>Ước tính chi phí cho chuyến đi</p>
+                <span class="close" onclick="closeModal('budget')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>💸 Chi phí tiết kiệm (2-3 triệu/người/3 ngày)</h3>
+                <ul>
+                    <li><strong>Máy bay:</strong> 1.5-2 triệu (khứ hồi)</li>
+                    <li><strong>Khách sạn:</strong> 300-500k/đêm</li>
+                    <li><strong>Ăn uống:</strong> 150-200k/ngày</li>
+                    <li><strong>Di chuyển:</strong> 100-150k/ngày</li>
+                    <li><strong>Tham quan:</strong> 200-300k/ngày</li>
+                </ul>
+
+                <h3>🏨 Chi phí trung bình (4-6 triệu/người/3 ngày)</h3>
+                <ul>
+                    <li><strong>Máy bay:</strong> 2-2.5 triệu</li>
+                    <li><strong>Khách sạn:</strong> 800k-1.2 triệu/đêm</li>
+                    <li><strong>Ăn uống:</strong> 300-400k/ngày</li>
+                    <li><strong>Di chuyển:</strong> 200-300k/ngày</li>
+                    <li><strong>Tham quan:</strong> 500-700k/ngày</li>
+                </ul>
+
+                <h3>🌟 Chi phí cao cấp (8-12 triệu/người/3 ngày)</h3>
+                <ul>
+                    <li><strong>Máy bay:</strong> 3-4 triệu (business)</li>
+                    <li><strong>Resort:</strong> 2-4 triệu/đêm</li>
+                    <li><strong>Ăn uống:</strong> 500-800k/ngày</li>
+                    <li><strong>Di chuyển:</strong> 400-600k/ngày</li>
+                    <li><strong>Tham quan:</strong> 1-1.5 triệu/ngày</li>
+                </ul>
+
+                <div class="tip-box">
+                    <strong>💡 Tiết kiệm:</strong> Book vé máy bay sớm, đi nhóm, ăn tại quán địa phương.
+                </div>
+
+                <div class="highlight">
+                    <strong>🎫 Combo tiết kiệm:</strong> Mua combo vé Vinpearl + khách sạn thường rẻ hơn mua lẻ.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal đồ cần thiết -->
+    <div id="packing" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🧳 Đồ cần thiết</h2>
+                <p>Check-list đầy đủ cho chuyến đi</p>
+                <span class="close" onclick="closeModal('packing')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🏖️ Đồ tắm biển</h3>
+                <ul>
+                    <li>Đồ bơi, bikini</li>
+                    <li>Khăn t목욕 lớn</li>
+                    <li>Dép xỏ ngón chống trượt</li>
+                    <li>Kính bơi, ống thở</li>
+                    <li>Phao bơi (nếu cần)</li>
+                </ul>
+
+                <h3>☀️ Chống nắng</h3>
+                <ul>
+                    <li>Kem chống nắng SPF 50+</li>
+                    <li>Mũ rộng vành</li>
+                    <li>Kính râm</li>
+                    <li>Áo khoác chống nắng</li>
+                    <li>Ô du lịch</li>
+                </ul>
+
+                <h3>💊 Y tế cá nhân</h3>
+                <ul>
+                    <li>Thuốc cảm lạnh, đau đầu</li>
+                    <li>Thuốc say xe, say sóng</li>
+                    <li>Thuốc dạ dày</li>
+                    <li>Băng cá nhân, betadine</li>
+                    <li>Thuốc chống dị ứng</li>
+                </ul>
+
+                <h3>🔌 Đồ điện tử</h3>
+                <ul>
+                    <li>Điện thoại + sạc dự phòng</li>
+                    <li>Máy ảnh (nếu có)</li>
+                    <li>Tai nghe</li>
+                    <li>Adapter điện (nếu cần)</li>
+                </ul>
+
+                <div class="tip-box">
+                    <strong>💡 Mẹo:</strong> Chuẩn bị túi zip để đựng đồ ướt và bảo vệ điện thoại khỏi nước biển.
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Quan trọng:</strong> Mang theo kem chống nắng và uống đủ nước để tránh say nắng.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal bí kíp tắm biển -->
+    <div id="beaches" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🌊 Bí kíp tắm biển</h2>
+                <p>An toàn và tận hưởng biển xanh</p>
+                <span class="close" onclick="closeModal('beaches')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🏖️ Các bãi biển đẹp nhất</h3>
+                <ul>
+                    <li><strong>Bãi biển Nha Trang:</strong> Trung tâm, sôi động</li>
+                    <li><strong>Bãi Dài:</strong> Hoang sơ, ít người</li>
+                    <li><strong>Bãi Tru:</strong> Yên tĩnh, phù hợp nghỉ dưỡng</li>
+                    <li><strong>Bãi Dốc Lết:</strong> Cảnh đẹp, sóng nhỏ</li>
+                </ul>
+
+                <h3>🌊 An toàn khi tắm biển</h3>
+                <ul>
+                    <li>Tắm ở khu vực có người cứu hộ</li>
+                    <li>Không tắm khi sóng lớn</li>
+                    <li>Tắm theo nhóm, không tắm một mình</li>
+                    <li>Chú ý dòng chảy và thủy triều</li>
+                    <li>Không đi xa bờ</li>
+                </ul>
+
+                <h3>⏰ Thời gian tắm biển tốt nhất</h3>
+                <ul>
+                    <li><strong>Sáng sớm:</strong> 6:00-8:00 (mát mẻ)</li>
+                    <li><strong>Chiều muộn:</strong> 16:00-18:00 (đẹp cho chụp ảnh)</li>
+                    <li><strong>Tránh:</strong> 10:00-15:00 (nắng gắt)</li>
+                </ul>
+
+                <div class="highlight">
+                    <h3>🏊 Hoạt động thú vị</h3>
+                    <ul>
+                        <li>Lặn ngắm san hô</li>
+                        <li>Dù lượn trên biển</li>
+                        <li>Jet ski</li>
+                        <li>Banana boat</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Lưu ý:</strong> Không tắm biển vào mùa mưa bão (9-12) do sóng lớn và nguy hiểm.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal an toàn -->
+    <div id="safety" class="modal">
+        <div class="modal-content">
