@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khách sạn Nha Trang - Đặt phòng trực tuyến</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🏖️ NHA TRANG</a>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-overlay" id="menu-overlay"></div>
+            <div class="side-menu" id="side-menu">
+                <span class="close-menu" id="close-menu">&times;</span>
+                <ul class="side-nav-menu">
+                    <li class="nav-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a href="thoitiet.html">Thời tiết</a></li>
+                    <li class="nav-item"><a href="khachsan.html" class="active">Khách sạn</a></li>
+                    <li class="nav-item"><a href="dichuyen.html">Di chuyển</a></li>
+                    <li class="nav-item"><a href="kinhnghiem.html">Kinh nghiệm</a></li>
+                </ul>
+            </div>
+            <ul class="nav-menu desktop-menu">
+                <li class="nav-item"><a href="index.html">Trang chủ</a></li>
+                <li class="nav-item"><a href="thoitiet.html">Thời tiết</a></li>
+                <li class="nav-item"><a href="khachsan.html" class="active">Khách sạn</a></li>
+                <li class="nav-item"><a href="dichuyen.html">Di chuyển</a></li>
+                <li class="nav-item"><a href="kinhnghiem.html">Kinh nghiệm</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="header">
+            <h1>🏨 KHÁCH SẠN NHA TRANG</h1>
+            <p>Tìm và đặt khách sạn tốt nhất với giá ưu đãi</p>
+        </div>
+        <div class="search-section">
+            <form class="search-form">
+                <div class="form-group">
+                    <label for="checkin">Ngày nhận phòng</label>
+                    <input type="date" id="checkin" name="checkin">
+                </div>
+                <div class="form-group">
+                    <label for="checkout">Ngày trả phòng</label>
+                    <input type="date" id="checkout" name="checkout">
+                </div>
+                <div class="form-group">
+                    <label for="guests">Số khách</label>
+                    <select id="guests" name="guests">
+                        <option value="1">1 người</option>
+                        <option value="2">2 người</option>
+                        <option value="3">3 người</option>
+                        <option value="4">4+ người</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rooms">Số phòng</label>
+                    <select id="rooms" name="rooms">
+                        <option value="1">1 phòng</option>
+                        <option value="2">2 phòng</option>
+                        <option value="3">3+ phòng</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="search-btn">🔍 Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+        <h2 class="section-title">🏨 KHÁCH SẠN NỔI BẬT</h2>
+        <div class="hotels-grid">
+            <div class="hotel-card" onclick="openModal('sheraton')">
+                <div class="hotel-image">🏖️</div>
+                <div class="hotel-content">
+                    <h3 class="hotel-name">Sheraton Nha Trang Hotel</h3>
+                    <div class="hotel-rating"><span class="stars">⭐⭐⭐⭐⭐</span><span class="rating-text">(9.2/10 - Xuất sắc)</span></div>
+                    <div class="hotel-location"><span>📍</span><span>26-28 Trần Phú, Nha Trang</span></div>
+                    <div class="hotel-amenities"><span class="amenity">🏊 Hồ bơi</span><span class="amenity">🍽️ Nhà hàng</span><span class="amenity">🚗 Đỗ xe</span><span class="amenity">📶 WiFi</span></div>
+                    <div class="hotel-price"><div><div class="price">3.500.000 VNĐ</div><div class="price-note">/ đêm</div></div><button class="book-btn">Đặt ngay</button></div>
+                </div>
+            </div>
+            <div class="hotel-card" onclick="openModal('intercontinental')">
+                <div class="hotel-image">🏨</div>
+                <div class="hotel-content">
+                    <h3 class="hotel-name">InterContinental Nha Trang</h3>
+                    <div class="hotel-rating"><span class="stars">⭐⭐⭐⭐⭐</span><span class="rating-text">(9.0/10 - Tuyệt vời)</span></div>
+                    <div class="hotel-location"><span>📍</span><span>32-34 Trần Phú, Nha Trang</span></div>
+                    <div class="hotel-amenities"><span class="amenity">🏊 Hồ bơi</span><span class="amenity">💆 Spa</span><span class="amenity">🏃 Gym</span><span class="amenity">🍽️ Nhà hàng</span></div>
+                    <div class="hotel-price"><div><div class="price">4.200.000 VNĐ</div><div class="price-note">/ đêm</div></div><button class="book-btn">Đặt ngay</button></div>
+                </div>
+            </div>
+            <div class="hotel-card" onclick="openModal('muongthanh')">
+                <div class="hotel-image">🌊</div>
+                <div class="hotel-content">
+                    <h3 class="hotel-name">Mường Thanh Luxury</h3>
+                    <div class="hotel-rating"><span class="stars">⭐⭐⭐⭐⭐</span><span class="rating-text">(8.8/10 - Rất tốt)</span></div>
+                    <div class="hotel-location"><span>📍</span><span>60 Trần Phú, Nha Trang</span></div>
+                    <div class="hotel-amenities"><span class="amenity">🏊 Hồ bơi</span><span class="amenity">🎵 Karaoke</span><span class="amenity">🍽️ Buffet</span><span class="amenity">🚗 Đỗ xe</span></div>
+                    <div class="hotel-price"><div><div class="price">2.800.000 VNĐ</div><div class="price-note">/ đêm</div></div><button class="book-btn">Đặt ngay</button></div>
+                </div>
+            </div>
+            <div class="hotel-card" onclick="openModal('vinpearl')">
+                <div class="hotel-image">🏝️</div>
+                <div class="hotel-content">
+                    <h3 class="hotel-name">Vinpearl Resort Nha Trang</h3>
+                    <div class="hotel-rating"><span class="stars">⭐⭐⭐⭐⭐</span><span class="rating-text">(9.1/10 - Xuất sắc)</span></div>
+                    <div class="hotel-location"><span>📍</span><span>Đảo Hòn Tre, Nha Trang</span></div>
+                    <div class="hotel-amenities"><span class="amenity">🏊 Hồ bơi</span><span class="amenity">🎢 Vinpearl Land</span><span class="amenity">🚡 Cáp treo</span><span class="amenity">🏖️ Bãi biển riêng</span></div>
+                    <div class="hotel-price"><div><div class="price">5.500.000 VNĐ</div><div class="price-note">/ đêm</div></div><button class="book-btn">Đặt ngay</button></div>
+                </div>
+            </div>
+            <div class="hotel-card" onclick="openModal('havana')">
+                <div class="hotel-image">🏖️</div>
+                <div class="hotel-content">
+                    <h3 class="hotel-name">Havana Beach Hotel</h3>
+                    <div class="hotel-rating"><span class="stars">⭐⭐⭐⭐</span><span class="rating-text">(8.5/10 - Tốt)</span></div>
+                    <div class="hotel-location"><span>📍</span><span>38 Trần Phú, Nha Trang</span></div>
+                    <div class="hotel-amenities"><span class="amenity">🏊 Hồ bơi</span><span class="amenity">🍽️ Nhà hàng</span><span class="amenity">📶 WiFi</span><span class="amenity">🛏️ Phòng gia đình</span></div>
+                    <div class="hotel-price"><div><div class="price">1.800.000 VNĐ</div><div class="price-note">/ đêm</div></div><button class="book-btn">Đặt ngay</button></div>
+                </div>
+            </div>
+            <div class="hotel-card" onclick="openModal('yasaka')">
+                <div class="hotel-image">🏨</div>
+                <div class="hotel-content">
+                    <h3 class="hotel-name">Yasaka Saigon Nha Trang</h3>
+                    <div class="hotel-rating"><span class="stars">⭐⭐⭐⭐</span><span class="rating-text">(8.3/10 - Tốt)</span></div>
+                    <div class="hotel-location"><span>📍</span><span>18 Trần Phú, Nha Trang</span></div>
+                    <div class="hotel-amenities"><span class="amenity">🏊 Hồ bơi</span><span class="amenity">💆 Spa</span><span class="amenity">🍽️ Nhà hàng</span><span class="amenity">🎵 Bar</span></div>
+                    <div class="hotel-price"><div><div class="price">2.200.000 VNĐ</div><div class="price-note">/ đêm</div></div><button class="book-btn">Đặt ngay</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal cho từng khách sạn -->
+    <div id="sheraton" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏖️ Sheraton Nha Trang Hotel</h2>
+                <p>Khách sạn 5 sao sang trọng bên bờ biển</p>
+                <span class="close" onclick="closeModal('sheraton')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div class="detail-section">
+                        <h3>🏨 Thông tin khách sạn</h3>
+                        <ul>
+                            <li><span>📍</span> 26-28 Trần Phú, Lộc Thọ, Nha Trang</li>
+                            <li><span>⭐</span> Khách sạn 5 sao</li>
+                            <li><span>🏗️</span> Cao 28 tầng, 280 phòng</li>
+                            <li><span>📞</span> (0258) 388 0000</li>
+                            <li><span>✅</span> Check-in: 15:00 | Check-out: 12:00</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h3>🏊 Tiện ích nổi bật</h3>
+                        <ul>
+                            <li><span>🏊</span> Hồ bơi ngoài trời với tầm nhìn ra biển</li>
+                            <li><span>💆</span> Spa & Massage sang trọng</li>
+                            <li><span>🏃</span> Phòng gym hiện đại 24/7</li>
+                            <li><span>🍽️</span> 3 nhà hàng & 2 quầy bar</li>
+                            <li><span>🎪</span> Câu lạc bộ trẻ em</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <h3>💎 Đặc biệt</h3>
+                    <p>Vị trí đắc địa ngay trung tâm Nha Trang, view biển tuyệt đẹp từ tất cả các phòng. Phục vụ bữa sáng buffet quốc tế phong phú.</p>
+                    <p><strong>Giá phòng:</strong> <span class="price">3.500.000 - 8.000.000 VNĐ/đêm</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal cho các khách sạn khác (tương tự, bạn có thể bổ sung thêm modal chi tiết cho từng khách sạn như trên) -->
+    <div id="intercontinental" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏨 InterContinental Nha Trang</h2>
+                <p>Khách sạn 5 sao, vị trí trung tâm, tiện nghi hiện đại</p>
+                <span class="close" onclick="closeModal('intercontinental')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Địa chỉ: 32-34 Trần Phú, Nha Trang</li>
+                    <li>Hồ bơi, Spa, Gym, Nhà hàng quốc tế</li>
+                    <li>Giá phòng: 4.200.000 - 7.000.000 VNĐ/đêm</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="muongthanh" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🌊 Mường Thanh Luxury</h2>
+                <p>Khách sạn 5 sao, view biển, buffet sáng đa dạng</p>
+                <span class="close" onclick="closeModal('muongthanh')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Địa chỉ: 60 Trần Phú, Nha Trang</li>
+                    <li>Hồ bơi, Karaoke, Buffet, Đỗ xe</li>
+                    <li>Giá phòng: 2.800.000 - 5.000.000 VNĐ/đêm</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="vinpearl" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏝️ Vinpearl Resort Nha Trang</h2>
+                <p>Resort 5 sao trên đảo, bãi biển riêng, Vinpearl Land</p>
+                <span class="close" onclick="closeModal('vinpearl')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Địa chỉ: Đảo Hòn Tre, Nha Trang</li>
+                    <li>Bãi biển riêng, Vinpearl Land, Cáp treo</li>
+                    <li>Giá phòng: 5.500.000 - 10.000.000 VNĐ/đêm</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="havana" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏖️ Havana Beach Hotel</h2>
+                <p>Khách sạn 4 sao, phòng gia đình, vị trí trung tâm</p>
+                <span class="close" onclick="closeModal('havana')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Địa chỉ: 38 Trần Phú, Nha Trang</li>
+                    <li>Hồ bơi, Nhà hàng, WiFi, Phòng gia đình</li>
+                    <li>Giá phòng: 1.800.000 - 3.000.000 VNĐ/đêm</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="yasaka" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏨 Yasaka Saigon Nha Trang</h2>
+                <p>Khách sạn 4 sao, bar, spa, nhà hàng</p>
+                <span class="close" onclick="closeModal('yasaka')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Địa chỉ: 18 Trần Phú, Nha Trang</li>
+                    <li>Hồ bơi, Spa, Nhà hàng, Bar</li>
+                    <li>Giá phòng: 2.200.000 - 4.000.000 VNĐ/đêm</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) modal.style.display = 'block';
+        }
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) modal.style.display = 'none';
+        }
+        window.onclick = function(event) {
+            if (event.target.classList && event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+        // Hamburger menu hiện đại (side menu trượt phải)
+        const hamburger = document.getElementById('hamburger-menu');
+        const sideMenu = document.getElementById('side-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const closeMenu = document.getElementById('close-menu');
+        hamburger.onclick = function() {
+            sideMenu.classList.add('open');
+            menuOverlay.classList.add('show');
+        };
+        closeMenu.onclick = function() {
+            sideMenu.classList.remove('open');
+            menuOverlay.classList.remove('show');
+        };
+        menuOverlay.onclick = function() {
+            sideMenu.classList.remove('open');
+            menuOverlay.classList.remove('show');
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nha Trang - Thành phố biển xinh đẹp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🏖️ NHA TRANG</a>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-overlay" id="menu-overlay"></div>
+            <div class="side-menu" id="side-menu">
+                <span class="close-menu" id="close-menu">&times;</span>
+                <ul class="side-nav-menu">
+                    <li class="nav-item"><a href="index.html" class="active">Trang chủ</a></li>
+                    <li class="nav-item"><a href="thoitiet.html">Thời tiết</a></li>
+                    <li class="nav-item"><a href="khachsan.html">Khách sạn</a></li>
+                    <li class="nav-item"><a href="dichuyen.html">Di chuyển</a></li>
+                    <li class="nav-item"><a href="kinhnghiem.html">Kinh nghiệm</a></li>
+                </ul>
+            </div>
+            <ul class="nav-menu desktop-menu">
+                <li class="nav-item"><a href="index.html" class="active">Trang chủ</a></li>
+                <li class="nav-item"><a href="thoitiet.html">Thời tiết</a></li>
+                <li class="nav-item"><a href="khachsan.html">Khách sạn</a></li>
+                <li class="nav-item"><a href="dichuyen.html">Di chuyển</a></li>
+                <li class="nav-item"><a href="kinhnghiem.html">Kinh nghiệm</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>🏖️ NHA TRANG</h1>
+            <p>Thành phố biển xinh đẹp - Khánh Hòa</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🏛️ ĐỊA DANH NỔI TIẾNG</h2>
+            <div class="grid">
+                <div class="card" onclick="openModal('vinpearl')">
+                    <h3><span class="icon">🎢</span>Vinpearl Land</h3>
+                    <p>Khu vui chơi giải trí hàng đầu Việt Nam với cáp treo vượt biển dài nhất thế giới</p>
+                </div>
+
+                <div class="card" onclick="openModal('ponagar')">
+                    <h3><span class="icon">🏛️</span>Tháp Bà Ponagar</h3>
+                    <p>Quần thể tháp Chăm cổ kính được xây dựng từ thế kỷ 8-13</p>
+                </div>
+
+                <div class="card" onclick="openModal('honchong')">
+                    <h3><span class="icon">🪨</span>Hòn Chồng</h3>
+                    <p>Khu du lịch với những tảng đá granite khổng lồ và truyền thuyết tình yêu</p>
+                </div>
+
+                <div class="card" onclick="openModal('dambaynoi')">
+                    <h3><span class="icon">🏞️</span>Đầm Bay Nội</h3>
+                    <p>Hồ nước ngọt trong xanh giữa núi đồi, được mệnh danh là "Đà Lạt thu nhỏ"</p>
+                </div>
+
+                <div class="card" onclick="openModal('bandao')">
+                    <h3><span class="icon">🌊</span>Bán đảo Hòn Khói</h3>
+                    <p>Điểm ngắm hoàng hôn đẹp nhất Nha Trang với những vách đá dựng đứng</p>
+                </div>
+
+                <div class="card" onclick="openModal('yangbay')">
+                    <h3><span class="icon">🦋</span>Khu sinh thái Yang Bay</h3>
+                    <p>Vườn bướm nhiệt đới và các loài động vật hoang dã độc đáo</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🍜 MÓN ĂN ĐẶC SẢN</h2>
+            <div class="grid">
+                <div class="card" onclick="openModal('bunca')">
+                    <h3><span class="icon">🍜</span>Bún cá sứa</h3>
+                    <p>Món bún đặc trưng với nước dùng trong vắt, cá tươi và sứa biển</p>
+                </div>
+
+                <div class="card" onclick="openModal('banhcan')">
+                    <h3><span class="icon">🥞</span>Bánh căn</h3>
+                    <p>Bánh nướng trong khuôn đất nung, ăn kèm nước mắm chua ngọt</p>
+                </div>
+
+                <div class="card" onclick="openModal('nemninh')">
+                    <h3><span class="icon">🍖</span>Nem nướng Ninh Hòa</h3>
+                    <p>Nem nướng thơm phức, cuốn bánh tráng với rau sống và nước mắm</p>
+                </div>
+
+                <div class="card" onclick="openModal('banhxeo')">
+                    <h3><span class="icon">🥞</span>Bánh xèo</h3>
+                    <p>Bánh mỏng giòn màu vàng, nhân tôm thịt, ăn kèm rau thơm</p>
+                </div>
+
+                <div class="card" onclick="openModal('bunbo')">
+                    <h3><span class="icon">🍲</span>Bún bò Nam Bộ</h3>
+                    <p>Bún trộn với thịt bò, đậu phộng rang và rau thơm</p>
+                </div>
+
+                <div class="card" onclick="openModal('chaclam')">
+                    <h3><span class="icon">🦐</span>Chả cá lăng</h3>
+                    <p>Cá lăng tươi làm chả, nướng than hồng thơm lừng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cho địa danh -->
+    <div id="vinpearl" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎢 Vinpearl Land</h2>
+                <p>Khu vui chơi giải trí hàng đầu</p>
+                <span class="close" onclick="closeModal('vinpearl')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="highlight">
+                    <h3>📍 Thông tin cơ bản</h3>
+                    <p><strong>Địa chỉ:</strong> Đảo Hòn Tre, Vịnh Nha Trang</p>
+                    <p><strong>Giờ mở cửa:</strong> 8:00 - 21:00 hàng ngày</p>
+                    <p class="price">Giá vé: 800.000 - 1.200.000 VNĐ</p>
+                </div>
+
+                <h3>🎯 Điểm nổi bật</h3>
+                <ul>
+                    <li>Cáp treo vượt biển dài 3.320m</li>
+                    <li>Công viên nước Vinpearl Water Park</li>
+                    <li>Thủy cung Vinpearl Aquarium</li>
+                    <li>Trò chơi cảm giác mạnh</li>
+                </ul>
+
+                <h3>🎪 Hoạt động giải trí</h3>
+                <ul>
+                    <li>Alpine Coaster - tàu lượn núi</li>
+                    <li>Zipline - trượt dây</li>
+                    <li>4D Cinema</li>
+                    <li>Game Zone</li>
+                </ul>
+
+                <div class="address">
+                    <strong>💡 Lưu ý:</strong> Nên mua vé trực tuyến để được giá tốt hơn. Tránh đi vào cuối tuần để tránh đông đúc.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cho Tháp Bà -->
+    <div id="ponagar" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏛️ Tháp Bà Ponagar</h2>
+                <p>Di tích lịch sử Chăm Pa</p>
+                <span class="close" onclick="closeModal('ponagar')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="highlight">
+                    <h3>📍 Thông tin cơ bản</h3>
+                    <p><strong>Địa chỉ:</strong> 2 Tháng 4, Vĩnh Phước, Nha Trang</p>
+                    <p><strong>Giờ mở cửa:</strong> 6:00 - 18:00</p>
+                    <p class="price">Giá vé: 30.000 VNĐ</p>
+                </div>
+
+                <h3>🏺 Lịch sử</h3>
+                <p>Tháp Bà Ponagar được xây dựng từ thế kỷ 8-13, là một trong những công trình kiến trúc Chăm Pa cổ nhất còn lại ở Việt Nam.</p>
+
+                <h3>🏛️ Kiến trúc</h3>
+                <ul>
+                    <li>4 tháp chính với tháp cao nhất 23m</li>
+                    <li>Điêu khắc tinh xảo theo phong cách Chăm</li>
+                    <li>Tượng thần Ponagar cao 1.2m</li>
+                </ul>
+
+                <div class="address">
+                    <strong>📸 Tips chụp ảnh:</strong> Thời điểm đẹp nhất là buổi sáng sớm hoặc chiều muộn khi ánh sáng mềm mại.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cho các món ăn -->
+    <div id="bunca" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🍜 Bún cá sứa</h2>
+                <p>Món đặc sản Nha Trang</p>
+                <span class="close" onclick="closeModal('bunca')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🥢 Đặc điểm</h3>
+                <p>Bún cá sứa là món ăn đặc trưng của Nha Trang với nước dùng trong vắt được nấu từ xương cá, cá tươi thái lát và sứa biển giòn sần sật.</p>
+
+                <h3>🍽️ Thành phần</h3>
+                <ul>
+                    <li>Bún tươi</li>
+                    <li>Cá lóc, cá thu thái lát</li>
+                    <li>Sứa biển tươi</li>
+                    <li>Rau thơm: húng quế, kinh giới</li>
+                    <li>Nước mắm pha chua ngọt</li>
+                </ul>
+
+                <div class="highlight">
+                    <h3>📍 Địa chỉ thưởng thức</h3>
+                    <p><strong>Bún cá sứa Hạnh:</strong> 7 Lê Thành Phương</p>
+                    <p><strong>Bún cá sứa Ngọc:</strong> 29 Nguyễn Trung Trực</p>
+                    <p class="price">Giá: 35.000 - 45.000 VNĐ/tô</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cho Hòn Chồng -->
+    <div id="honchong" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🪨 Hòn Chồng</h2>
+                <p>Khu du lịch nổi tiếng với những tảng đá kỳ vĩ và truyền thuyết tình yêu</p>
+                <span class="close" onclick="closeModal('honchong')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="highlight">
+                    <h3>📍 Thông tin cơ bản</h3>
+                    <p><strong>Địa chỉ:</strong> Phường Vĩnh Phước, Nha Trang</p>
+                    <p><strong>Giờ mở cửa:</strong> 7:00 - 18:00</p>
+                    <p class="price">Giá vé: 30.000 VNĐ</p>
+                </div>
+                <h3>🪨 Điểm nổi bật</h3>
+                <ul>
+                    <li>Những tảng đá chồng lên nhau độc đáo, view biển tuyệt đẹp</li>
+                    <li>Truyền thuyết về bàn tay khổng lồ in trên đá</li>
+                    <li>Quán cà phê ngắm biển, check-in sống ảo</li>
+                </ul>
+                <div class="address">
+                    <strong>💡 Lưu ý:</strong> Nên đi vào buổi chiều để ngắm hoàng hôn tuyệt đẹp.
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal cho Đầm Bay Nội -->
+    <div id="dambaynoi" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏞️ Đầm Bay Nội</h2>
+                <p>Hồ nước ngọt trong xanh giữa núi đồi, "Đà Lạt thu nhỏ" của Nha Trang</p>
+                <span class="close" onclick="closeModal('dambaynoi')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="highlight">
+                    <h3>📍 Thông tin cơ bản</h3>
+                    <p><strong>Địa chỉ:</strong> Xã Ninh Ích, Ninh Hòa, Khánh Hòa</p>
+                    <p><strong>Giờ mở cửa:</strong> 6:00 - 18:00</p>
+                    <p class="price">Miễn phí</p>
+                </div>
+                <h3>🏞️ Điểm nổi bật</h3>
+                <ul>
+                    <li>Khung cảnh hồ nước trong xanh, bao quanh bởi núi non</li>
+                    <li>Không khí mát mẻ, thích hợp picnic, dã ngoại</li>
+                    <li>Chụp ảnh sống ảo cực đẹp</li>
+                </ul>
+                <div class="address">
+                    <strong>💡 Lưu ý:</strong> Nên mang theo đồ ăn nhẹ và nước uống, không xả rác giữ gìn vệ sinh.</div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal cho Bán đảo Hòn Khói -->
+    <div id="bandao" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🌊 Bán đảo Hòn Khói</h2>
+                <p>Điểm ngắm hoàng hôn đẹp nhất Nha Trang với những vách đá dựng đứng</p>
+                <span class="close" onclick="closeModal('bandao')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="highlight">
+                    <h3>📍 Thông tin cơ bản</h3>
+                    <p><strong>Địa chỉ:</strong> Ninh Hòa, Khánh Hòa</p>
+                    <p><strong>Giờ mở cửa:</strong> 6:00 - 18:00</p>
+                    <p class="price">Miễn phí</p>
+                </div>
+                <h3>🌅 Điểm nổi bật</h3>
+                <ul>
+                    <li>Vách đá dựng đứng, biển xanh trong</li>
+                    <li>Ngắm hoàng hôn tuyệt đẹp</li>
+                    <li>Trải nghiệm làng chài ven biển</li>
+                </ul>
+                <div class="address">
+                    <strong>💡 Lưu ý:</strong> Đường đi hơi khó, nên đi xe máy hoặc thuê xe ô tô nhỏ.</div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal cho Yang Bay -->
+    <div id="yangbay" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🦋 Khu sinh thái Yang Bay</h2>
+                <p>Vườn bướm nhiệt đới và các loài động vật hoang dã độc đáo</p>
+                <span class="close" onclick="closeModal('yangbay')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="highlight">
+                    <h3>📍 Thông tin cơ bản</h3>
+                    <p><strong>Địa chỉ:</strong> Xã Khánh Phú, huyện Khánh Vĩnh, Khánh Hòa</p>
+                    <p><strong>Giờ mở cửa:</strong> 7:00 - 17:00</p>
+                    <p class="price">Giá vé: 150.000 VNĐ/người lớn, 100.000 VNĐ/trẻ em</p>
+                </div>
+                <h3>🦋 Điểm nổi bật</h3>
+                <ul>
+                    <li>Thác nước Yang Bay hùng vĩ</li>
+                    <li>Vườn bướm, vườn thú bán hoang dã</li>
+                    <li>Trải nghiệm tắm suối khoáng nóng</li>
+                </ul>
+                <div class="address">
+                    <strong>💡 Lưu ý:</strong> Nên mang theo đồ bơi, kem chống nắng và thuốc chống côn trùng.</div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal cho Bánh căn -->
+    <div id="banhcan" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🥞 Bánh căn</h2>
+                <p>Bánh nướng trong khuôn đất nung, ăn kèm nước mắm chua ngọt</p>
+                <span class="close" onclick="closeModal('banhcan')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🥞 Đặc điểm</h3>
+                <p>Bánh căn là món ăn dân dã nổi tiếng của Nha Trang, được làm từ bột gạo, nướng trong khuôn đất, ăn kèm mỡ hành, trứng, tôm, mực...</p>
+                <h3>🍽️ Thành phần</h3>
+                <ul>
+                    <li>Bột gạo</li>
+                    <li>Trứng, tôm, mực, thịt băm</li>
+                    <li>Mỡ hành, nước mắm chua ngọt</li>
+                </ul>
+                <div class="highlight">
+                    <h3>📍 Địa chỉ thưởng thức</h3>
+                    <p><strong>Bánh căn 51:</strong> 51 Tô Hiến Thành</p>
+                    <p><strong>Bánh căn Bà Thừa:</strong> 55 Yersin</p>
+                    <p class="price">Giá: 20.000 - 35.000 VNĐ/phần</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal cho Nem nướng Ninh Hòa -->
+    <div id="nemninh" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🍖 Nem nướng Ninh Hòa</h2>
+                <p>Nem nướng thơm phức, cuốn bánh tráng với rau sống và nước mắm</p>
+                <span class="close" onclick="closeModal('nemninh')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🍖 Đặc điểm</h3>
+                <p>Nem nướng Ninh Hòa là món đặc sản nổi tiếng với nem được nướng trên than hồng, ăn kèm bánh tráng, rau sống và nước chấm đặc biệt.</p>
+                <h3>🍽️ Thành phần</h3>
+                <ul>
+                    <li>Nem thịt heo nướng</li>
+                    <li>Bánh tráng</li>
+                    <li>Rau sống, dưa leo, đồ chua</li>
+                    <li>Nước chấm nem</li>
+                </ul>
+                <div class="highlight">
+                    <h3>📍 Địa chỉ thưởng thức</h3>
+                    <p><strong>Nem nướng Đặng Văn Quyên:</strong> 16A Lãn Ông</p>
+                    <p><strong>Nem nướng Vũ Thành An:</strong> 15 Lê Lợi</p>
+                    <p class="price">Giá: 40.000 - 60.000 VNĐ/phần</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal cho Bánh xèo -->
+    <div id="banhxeo" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🥞 Bánh xèo</h2>
+                <p>Bánh mỏng giòn màu vàng, nhân tôm thịt, ăn kèm rau thơm</p>
+                <span class="close" onclick="closeModal('banhxeo')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🥞 Đặc điểm</h3>
+                <p>Bánh xèo Nha Trang nhỏ, giòn, nhân tôm, mực, thịt, ăn kèm rau sống và nước mắm pha.</p>
+                <h3>🍽️ Thành phần</h3>
+                <ul>
+                    <li>Bột gạo, nghệ</li>
+                    <li>Tôm, mực, thịt heo</li>
+                    <li>Giá đỗ, hành lá</li>
+                    <li>Rau sống, nước mắm chua ngọt</li>
+                </ul>
+                <div class="highlight">
+                    <h3>📍 Địa chỉ thưởng thức</h3>
+                    <p><strong>Bánh xèo chảo:</strong> 85 Tô Hiến Thành</p>
+                    <p><strong>Bánh xèo Cô Tám:</strong> 6 Tháp Bà</p>
+                    <p class="price">Giá: 25.000 - 40.000 VNĐ/phần</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal cho Bún bò Nam Bộ -->
+    <div id="bunbo" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🍲 Bún bò Nam Bộ</h2>
+                <p>Bún trộn với thịt bò, đậu phộng rang và rau thơm</p>
+                <span class="close" onclick="closeModal('bunbo')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🍲 Đặc điểm</h3>
+                <p>Bún bò Nam Bộ là món bún trộn nổi tiếng, thịt bò xào mềm, ăn cùng bún tươi, rau sống, đậu phộng và nước mắm chua ngọt.</p>
+                <h3>🍽️ Thành phần</h3>
+                <ul>
+                    <li>Bún tươi</li>
+                    <li>Thịt bò xào</li>
+                    <li>Rau sống, giá đỗ</li>
+                    <li>Đậu phộng rang</li>
+                    <li>Nước mắm pha</li>
+                </ul>
+                <div class="highlight">
+                    <h3>📍 Địa chỉ thưởng thức</h3>
+                    <p><strong>Bún bò Nam Bộ:</strong> 42 Ngô Gia Tự</p>
+                    <p><strong>Bún bò Nam Bộ:</strong> 120 Hoàng Hoa Thám</p>
+                    <p class="price">Giá: 35.000 - 50.000 VNĐ/tô</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal cho Chả cá lăng -->
+    <div id="chaclam" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🦐 Chả cá lăng</h2>
+                <p>Cá lăng tươi làm chả, nướng than hồng thơm lừng</p>
+                <span class="close" onclick="closeModal('chaclam')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🦐 Đặc điểm</h3>
+                <p>Chả cá lăng là món đặc sản Nha Trang, cá lăng tươi xay nhuyễn, tẩm ướp gia vị, nướng hoặc chiên vàng, ăn kèm bún và nước mắm.</p>
+                <h3>🍽️ Thành phần</h3>
+                <ul>
+                    <li>Cá lăng tươi</li>
+                    <li>Gia vị: tiêu, hành, tỏi, nước mắm</li>
+                    <li>Bún tươi, rau sống</li>
+                </ul>
+                <div class="highlight">
+                    <h3>📍 Địa chỉ thưởng thức</h3>
+                    <p><strong>Chả cá lăng Bà Sắc:</strong> 123 Yersin</p>
+                    <p><strong>Chả cá lăng Nguyên Loan:</strong> 123 Ngô Gia Tự</p>
+                    <p class="price">Giá: 30.000 - 45.000 VNĐ/phần</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) modal.style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) modal.style.display = 'none';
+        }
+
+        // Đóng modal khi click bên ngoài
+        window.onclick = function(event) {
+            if (event.target.classList && event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+        // Hamburger menu hiện đại (side menu trượt phải)
+        const hamburger = document.getElementById('hamburger-menu');
+        const sideMenu = document.getElementById('side-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const closeMenu = document.getElementById('close-menu');
+        hamburger.onclick = function() {
+            sideMenu.classList.add('open');
+            menuOverlay.classList.add('show');
+        };
+        closeMenu.onclick = function() {
+            sideMenu.classList.remove('open');
+            menuOverlay.classList.remove('show');
+        };
+        menuOverlay.onclick = function() {
+            sideMenu.classList.remove('open');
+            menuOverlay.classList.remove('show');
+        };
+    </script>
+</body>
+</html>

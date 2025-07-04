@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời tiết Nha Trang - Dự báo 7 ngày</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🏖️ NHA TRANG</a>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-overlay" id="menu-overlay"></div>
+            <div class="side-menu" id="side-menu">
+                <span class="close-menu" id="close-menu">&times;</span>
+                <ul class="side-nav-menu">
+                    <li class="nav-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a href="thoitiet.html" class="active">Thời tiết</a></li>
+                    <li class="nav-item"><a href="khachsan.html">Khách sạn</a></li>
+                    <li class="nav-item"><a href="dichuyen.html">Di chuyển</a></li>
+                    <li class="nav-item"><a href="kinhnghiem.html">Kinh nghiệm</a></li>
+                </ul>
+            </div>
+            <ul class="nav-menu desktop-menu">
+                <li class="nav-item"><a href="index.html">Trang chủ</a></li>
+                <li class="nav-item"><a href="thoitiet.html" class="active">Thời tiết</a></li>
+                <li class="nav-item"><a href="khachsan.html">Khách sạn</a></li>
+                <li class="nav-item"><a href="dichuyen.html">Di chuyển</a></li>
+                <li class="nav-item"><a href="kinhnghiem.html">Kinh nghiệm</a></li>
+            </ul>
+        </div>
+    </nav>
+<div class="container">
+    <div class="header">
+        <h1>🌤️ Thời tiết Nha Trang</h1>
+        <p>Cập nhật dự báo thời tiết mới nhất cho chuyến đi của bạn!</p>
+    </div>
+    <div class="weather-current">
+        <div class="current-temp">30°C</div>
+        <div class="current-desc">☀️ Nắng đẹp</div>
+        <div class="weather-details">
+            <div class="detail-item"><span class="detail-icon">💧</span><span class="detail-label">Độ ẩm:</span> <span class="detail-value">65%</span></div>
+            <div class="detail-item"><span class="detail-icon">💨</span><span class="detail-label">Gió:</span> <span class="detail-value">12 km/h</span></div>
+            <div class="detail-item"><span class="detail-icon">🌡️</span><span class="detail-label">Cao/Thấp:</span> <span class="detail-value">33°C / 27°C</span></div>
+        </div>
+    </div>
+    <div class="forecast-section">
+        <h2 class="section-title">Dự báo 7 ngày tới</h2>
+        <div class="forecast-grid">
+            <div class="forecast-card">
+                <div class="forecast-day">Thứ 2</div>
+                <div class="forecast-icon">☀️</div>
+                <div class="forecast-temp"><span class="high">33°C</span> / <span class="low">27°C</span></div>
+                <div class="forecast-desc">Nắng</div>
+            </div>
+            <div class="forecast-card">
+                <div class="forecast-day">Thứ 3</div>
+                <div class="forecast-icon">🌤️</div>
+                <div class="forecast-temp"><span class="high">32°C</span> / <span class="low">26°C</span></div>
+                <div class="forecast-desc">Nắng nhẹ</div>
+            </div>
+            <div class="forecast-card">
+                <div class="forecast-day">Thứ 4</div>
+                <div class="forecast-icon">⛅</div>
+                <div class="forecast-temp"><span class="high">31°C</span> / <span class="low">26°C</span></div>
+                <div class="forecast-desc">Mây</div>
+            </div>
+            <div class="forecast-card">
+                <div class="forecast-day">Thứ 5</div>
+                <div class="forecast-icon">🌦️</div>
+                <div class="forecast-temp"><span class="high">30°C</span> / <span class="low">25°C</span></div>
+                <div class="forecast-desc">Mưa rào</div>
+            </div>
+            <div class="forecast-card">
+                <div class="forecast-day">Thứ 6</div>
+                <div class="forecast-icon">🌧️</div>
+                <div class="forecast-temp"><span class="high">29°C</span> / <span class="low">24°C</span></div>
+                <div class="forecast-desc">Mưa</div>
+            </div>
+            <div class="forecast-card">
+                <div class="forecast-day">Thứ 7</div>
+                <div class="forecast-icon">🌤️</div>
+                <div class="forecast-temp"><span class="high">32°C</span> / <span class="low">26°C</span></div>
+                <div class="forecast-desc">Nắng nhẹ</div>
+            </div>
+            <div class="forecast-card">
+                <div class="forecast-day">CN</div>
+                <div class="forecast-icon">☀️</div>
+                <div class="forecast-temp"><span class="high">33°C</span> / <span class="low">27°C</span></div>
+                <div class="forecast-desc">Nắng</div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) modal.style.display = 'block';
+        }
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) modal.style.display = 'none';
+        }
+        window.onclick = function(event) {
+            if (event.target.classList && event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+        // Hamburger menu hiện đại (side menu trượt phải)
+        const hamburger = document.getElementById('hamburger-menu');
+        const sideMenu = document.getElementById('side-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const closeMenu = document.getElementById('close-menu');
+        hamburger.onclick = function() {
+            sideMenu.classList.add('open');
+            menuOverlay.classList.add('show');
+        };
+        closeMenu.onclick = function() {
+            sideMenu.classList.remove('open');
+            menuOverlay.classList.remove('show');
+        };
+        menuOverlay.onclick = function() {
+            sideMenu.classList.remove('open');
+            menuOverlay.classList.remove('show');
+        };
+    </script>
+</body>
+</html>
