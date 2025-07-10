@@ -1,0 +1,21 @@
+.output{
+    display:grid;
+    grid-template-columns: 200px 200px 100px;
+    column-gap: 10px;
+    row-gap:10px;
+    margin-bottom:5px;
+   
+}
+.outputbutton{
+   background-color:red;
+   border:1px;
+}
+.button{
+ background-color:rgb(17, 207, 17);
+ border:1px;
+}
+.outputbutton:hover,button:hover {
+    opacity: 0.5;
+    cursor:pointer;
+    
+}
